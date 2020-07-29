@@ -26,15 +26,15 @@ btnStart.addEventListener("click", start);
 let users = {};
 let currentUser;
 let cHangmen;
-
-let currentTimer;
+let timerIni;
 
 function start(event) {
   addUser();
   hideStart();
   
-  currentTimer = new Date();
-  
+  let currentTimer = new Date();
+  timerIni =currentTimer.getTime();
+
   
 }
 
@@ -93,19 +93,20 @@ let arrayWords = [["Hola", "Mesa", "Boli", "Sapo"], ["Libro", "Plato"]];
 
 function handleLetter(event) {
   event.target.classList.add("hide");
-
   let letter = event.target.innerHTML; 
-
+  let timerEnd;
   cHangmen.addLetter(letter);
 
   if (cHangmen.userWins()) {
     
     showWin();
+    let currentTimer = new Date();
+    timerEnd = ((currentTimer.getTime() - timerIni)/1000).toFixed(2);
+    cHangmen.updateTime(timerEnd);
     
   }
   
   else if(cHangmen.userLoses()){
-    
      showLose();
     
   }
@@ -140,13 +141,15 @@ function newHangMen(user) {
       });
     } else {
       mistakes++; 
-              // siguiente frame del hangmen
+       // siguiente frame del hangmen
     }
   }
 
   // function
 
   return {
+    
+    
     userWins() {
       return (mistakes <= MAX_MISTAKES) && (counterLetters >= currentWord.length);
     },
@@ -155,6 +158,10 @@ function newHangMen(user) {
     },
     addLetter(letter) {
       tryLetter(letter);
+    },
+    
+    updateTime(time){
+      user.currentTime = time;
     }
   };
 }
