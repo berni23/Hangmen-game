@@ -24,12 +24,9 @@ let users = {};
 let currentUser;
 let cHangmen;
 
-
 function start(event) {
   addUser();
   hideStart();
-  
-  
 }
 
 function addUser() {
@@ -37,8 +34,6 @@ function addUser() {
   users[name] = User(name);
   addScore(name);
   cHangmen = newHangMen(users[name]);
-  
-  
 }
 
 function hideStart() {
@@ -80,11 +75,9 @@ let arrayWords = [["Hola", "Mesa", "Boli", "Sapo"], ["Libro", "Plato"]];
 // function to handel when user clicks a letter
 function handleLetter(event) {
   event.target.classList.add("hide");
-  
-  
 
   let letter = event.target.innerHTML;
-  
+
   /*cHangmen.
     
   cHangmen.addLetter(letter);
@@ -96,66 +89,58 @@ function handleLetter(event) {
   */
 }
 
-
 //returns an object to manage the actual game
 function newHangMen(user) {
   const MAX_MISTAKES = 6;
   let mistakes = 0;
 
   let currentWord = randWord(user.matchesPlayed % arrayWords.length).split("");
-  
-  currentWord.forEach(el=>{
+  //let guessedWord;
+  let counterLetters = 0;
+
+  currentWord.forEach(el => {
     let newSpace = document.createElement("li");
     guessedWordLetters.appendChild(newSpace);
+    //guessedWord.push("");
   });
-  
-  
+
   //get created spaces
   let displayedGuessedLetters = document.querySelectorAll(".word > li");
-  
-  let guessedWord = currentWord.map(el=>{return ""});
-  
+
   // check if a letter belongs to the word to be guessed, if so display the guessed letter
-  function tryLetter(letter){
-    if(currentWord.indexOf(letter)!==-1){  
-      currentWord.forEach((el,index)=>{
-        if(el===letter){
-          guessedWord[index] = el;
+  function tryLetter(letter) {
+    if (currentWord.indexOf(letter) !== -1) {
+      currentWord.forEach((el, index) => {
+        if (el === letter) {
+          //guessedWord[index] = el;
           displayedGuessedLetters[index].textContent = letter;
+          counterLetters++;
         }
       });
-      
-    }else{
+    } else {
       mistakes++;
     }
-      
   }
 
   // function
 
   return {
     userWins() {
-      return mistakes < MAX_MISTAKES; // bool
+      return mistakes < MAX_MISTAKES && (counterLetters>=currentWord.length) 
     },
 
     userLoses() {
       return mistakes >= MAX_MISTAKES;
-    },addLetter(letter){
+    },
+    addLetter(letter) {
       tryLetter(letter);
     }
-    
-    
-      
-    }
-    
   };
-
-
+}
 
 //Returns a random word from the arrayWords array
 function randWord(arrNum) {
-  
-   // get a random word according to the difficulty of the match
+  // get a random word according to the difficulty of the match
   let Arrlength = arrayWords[arrNum].length;
 
   let randPos = Math.floor(Math.random() * Arrlength);
