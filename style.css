@@ -28,7 +28,7 @@ section {
 
 h1 {
   font-style: italic;
-  color: #373fff;
+  color: black;
 }
 
 h2 {
@@ -92,6 +92,10 @@ button {
   justify-content:space-around;
 }
 
+#screen-game.hide{
+  display:none;
+} 
+
 .game-wrapper {
   display: flex;
   justify-content: space-between;
@@ -145,6 +149,7 @@ button {
 }
 
 .game-letters li:hover{
+  
   
   background-color:black;
   cursor:pointer;

@@ -11,7 +11,10 @@
     <link rel="stylesheet" href="/style.css" />
 
     <!-- import the webpage's javascript file -->
+    
+    <script src="https://code.iconify.design/1/1.0.7/iconify.min.js"></script>
     <script src="/script.js" defer></script>
+    
   </head>
   <body>
     <div class="container">
@@ -37,12 +40,11 @@
               </ul>
             </div>
           </div>
-          
+
           <ul class="game-letters">
             <li>A</li>
             <li>B</li>
             <li>C</li>
-            <li>D</li>
             <li>E</li>
             <li>F</li>
             <li>G</li>
@@ -74,12 +76,30 @@
             <li>E</li>
             <li>F</li>
             <li>G</li>
-            
           </ul>
         </div>
         <div id="screen-end" class="ini">
-        
-        
+          <div class="win-wrapper">
+            <h1>
+              You Won!
+              <span class="iconify" data-icon="emojione:party-popper" data-inline="false"></span>
+            </h1>
+
+            <br
+            <p>
+              You won in X seconds
+              <br>
+              <!-- seconds in javascript-->
+            </p>
+          </div>
+          <div class="lose-wrapper hide">
+          <h1>
+            You Lost!
+          </h1>
+        </div>
+          <button>
+            Play again!
+          </button>
         </div>
       </section>
       <section id="user-scores" class="container-right">
