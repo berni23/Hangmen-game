@@ -27,9 +27,15 @@ let users = {};
 let currentUser;
 let cHangmen;
 
+let currentTimer;
+
 function start(event) {
   addUser();
   hideStart();
+  
+  currentTimer = new Date();
+  
+  
 }
 
 function addUser() {
@@ -88,11 +94,20 @@ let arrayWords = [["Hola", "Mesa", "Boli", "Sapo"], ["Libro", "Plato"]];
 function handleLetter(event) {
   event.target.classList.add("hide");
 
-  let letter = event.target.innerHTML; // A  // B //C letra que has pulsado
+  let letter = event.target.innerHTML; 
 
   cHangmen.addLetter(letter);
 
   if (cHangmen.userWins()) {
+    
+    showWin();
+    
+  }
+  
+  else if(cHangmen.userLoses()){
+    
+     showLose();
+    
   }
 }
 
@@ -102,13 +117,12 @@ function newHangMen(user) {
   let mistakes = 0;
 
   let currentWord = randWord(user.matchesPlayed % arrayWords.length).split("");
-  //let guessedWord;
   let counterLetters = 0;
 
   currentWord.forEach(el => {
     let newSpace = document.createElement("li");
     guessedWordLetters.appendChild(newSpace);
-    //guessedWord.push("");
+ 
   });
 
   //get created spaces
@@ -125,7 +139,8 @@ function newHangMen(user) {
         }
       });
     } else {
-      mistakes++;
+      mistakes++; 
+              // siguiente frame del hangmen
     }
   }
 
@@ -133,11 +148,10 @@ function newHangMen(user) {
 
   return {
     userWins() {
-      return mistakes < MAX_MISTAKES && counterLetters >= currentWord.length;
+      return (mistakes <= MAX_MISTAKES) && (counterLetters >= currentWord.length);
     },
-
     userLoses() {
-      return mistakes >= MAX_MISTAKES;
+      return mistakes > MAX_MISTAKES;
     },
     addLetter(letter) {
       tryLetter(letter);
@@ -149,5 +163,5 @@ function newHangMen(user) {
 function randWord(arrNum) {
   let Arrlength = arrayWords[arrNum].length;
   let randPos = Math.floor(Math.random() * Arrlength);
-  return arrayWords[arrNum][randPos];
+  return arrayWords[arrNum][randPos].toUpperCase();
 }
