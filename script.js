@@ -97,20 +97,19 @@ function handleLetter(event) {
 }
 
 
-
-
 //returns an object to manage the actual game
 function newHangMen(user) {
   const MAX_MISTAKES = 6;
   let mistakes = 0;
-  // get a random word according to the difficulty of the match
+
   let currentWord = randWord(user.matchesPlayed % arrayWords.length).split("");
   
-  // add blanck spaces for guessed word
   currentWord.forEach(el=>{
     let newSpace = document.createElement("li");
     guessedWordLetters.appendChild(newSpace);
   });
+  
+  
   //get created spaces
   let displayedGuessedLetters = document.querySelectorAll(".word > li");
   
@@ -132,9 +131,6 @@ function newHangMen(user) {
       
   }
 
-  
-  
-  
   // function
 
   return {
@@ -158,6 +154,8 @@ function newHangMen(user) {
 
 //Returns a random word from the arrayWords array
 function randWord(arrNum) {
+  
+   // get a random word according to the difficulty of the match
   let Arrlength = arrayWords[arrNum].length;
 
   let randPos = Math.floor(Math.random() * Arrlength);
