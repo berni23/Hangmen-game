@@ -58,6 +58,15 @@ button {
   margin: 10px 0px;
 }
 
+dl {
+  display:flex;
+  flex-direction: column;
+}
+
+dt, dd{
+  padding-bottom:20px;
+}
+
 .container {
   width: 100%;
   display: flex;

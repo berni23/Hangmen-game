@@ -1,9 +1,8 @@
-
-// complete html 
+// complete html
 
 var alphabet = "abcdefghijklmnopqrstuvwxyz".split("");
 
-var gameLetters = document.querySelector(".game-letters")
+var gameLetters = document.querySelector(".game-letters");
 
 alphabet.forEach(letter => {
   var newLetter = document.createElement("li");
@@ -13,73 +12,78 @@ alphabet.forEach(letter => {
 
 // Start Game
 var inputName = document.getElementById("user-name");
-var btnStart =  document.getElementById("button-start");
+var btnStart = document.getElementById("button-start");
 var screenUserName = document.getElementById("screen-username");
 var screenGame = document.getElementById("screen-game");
 var scorePanel = document.getElementById("user-score-list");
 
+btnStart.addEventListener("click", start);
 
-btnStart.addEventListener("click",addUser);
+let users = {};
 
+function start(event) {
+  addUser();
+  hideStart();
 
-let users = {
+}
+
+function addUser() {
+  let name = inputName.value;
+  users[name] = User();
+  addScore(name);
  
 }
 
-function start(){
-  addUser();
-  
-}
-
-function addUser(event){
-  let name = inputName.value;
-
-  console.log(name);
-  users[name] = User();
-  
-  console.log(users);
-  
-  hideStart();
-  addScore();
-  
-
-  
-}
-
-
-function hideStart(){
-  
+function hideStart() {
   screenUserName.classList.add("hide");
   screenGame.classList.remove("hide");
 }
 
-function User(){
-  
+function User() {
   return {
-  playing:true,
-  currentScore:undefined,
-  elapsedTime:undefined,
-  victories:undefined
-  }
-  
+    playing: true,
+    currentScore: undefined,
+    elapsedTime: undefined,
+    victories: undefined
+  };
 }
 
-function addScore(name){
-  
+function addScore(name) {
   // dt , dd
   let newScoreName = document.createElement("dt");
   let newScoreCurrent = document.createElement("dd");
-  newScoreName.innerHTML=name;
+  newScoreName.innerHTML = name;
   newScoreCurrent.innerHTML = "Currently playing";
-  scorePanel.insertAdjacentElement("afterbegin",newScoreCurrent);
-  scorePanel.insertAdjacentElement("afterbegin",newScoreName);
-
-  
-  
-  
+  scorePanel.insertAdjacentElement("afterbegin", newScoreCurrent);
+  scorePanel.insertAdjacentElement("afterbegin", newScoreName);
 }
-  
 
 //Playing Game
 
+let letters =document.querySelectorAll(".game-letters > li");
 
+
+
+let arraywords  = {
+  
+  fourLetters 
+  
+  
+}
+    
+    
+    
+
+/*function startGame(name){
+  
+  const maxMistakes = 6;
+  let mistakes = 0;
+  
+  
+  
+  
+  while(!lose&&!win)
+
+
+
+*/
