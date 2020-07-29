@@ -1,7 +1,4 @@
-// complete html
-
 var alphabet = "abcdefghijklmnopqrstuvwxyz".split("");
-
 var gameLetters = document.querySelector(".game-letters");
 
 alphabet.forEach(letter => {
@@ -89,14 +86,13 @@ letters.forEach(el => {
   el.addEventListener("click", handleLetter);
 });
 
-let arrayWords = [["hola", "mesa", "boli", "sapo","agua"], ["libro", "plato","gorra"]];
+let arrayWords = [["hola", "mesa", "boli", "sapo","agua"], ["libro", "plato","gorra"],["guante","piedra"]];
 
 function handleLetter(event) {
   event.target.classList.add("hide");
   let letter = event.target.innerHTML;
   let timerEnd;
   currentHangMen.addLetter(letter);
-
   if (currentHangMen.userWins()) {
     let currentTimer = new Date();
     timerEnd = ((currentTimer.getTime() - timerIni) / 1000).toFixed(0);
@@ -107,7 +103,6 @@ function handleLetter(event) {
     showLose();
   }
 }
-
 //returns an object to manage the actual game
 function newHangMen(user) {
   const MAX_MISTAKES = 6;
@@ -143,18 +138,14 @@ function newHangMen(user) {
     addLetter(letter) {
       tryLetter(letter);
     },
-
     updateTime(time) {
       user.currentScore = time;
     },
-
     addMatchesPlayed() {
       user.matchesPLayed++;
     }
   };
 }
-
-//Returns a random word from the arrayWords array
 
 function randWord(arrNum) {
   let Arrlength = arrayWords[arrNum].length;
@@ -167,6 +158,5 @@ function randWord(arrNum) {
 1 - Implement play again feature ( more difficult word each time);
 2 - Display result in the right;
 3 - HandMan;
-
 
 */
