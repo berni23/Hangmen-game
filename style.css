@@ -35,6 +35,8 @@ h2 {
   padding-bottom: 24px;
 }
 
+
+
 input {
   display: block;
   border: 2px solid black;
@@ -76,6 +78,10 @@ button {
 .container-right {
   width: 310px;
   height: 520px;
+  display: flex;
+  flex-direction:column;
+  justify-content: top;
+  align-items: center;
 }
 
 #screen-username {

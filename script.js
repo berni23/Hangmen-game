@@ -3,7 +3,7 @@
 
 var alphabet = "abcdefghijklmnopqrstuvwxyz".split("");
 
-let gameLetters = document.querySelector(".game-letters")
+var gameLetters = document.querySelector(".game-letters")
 
 alphabet.forEach(letter => {
   var newLetter = document.createElement("li");
@@ -14,13 +14,18 @@ alphabet.forEach(letter => {
 // Start Game
 var inputName = document.getElementById("user-name");
 var btnStart =  document.getElementById("button-start");
+var screenUserName = document.getElementById("screen-username");
+var screenGame = document.getElementById("screen-game");
+var 
 
-btnStart.addEventListener("click",nextFrame(event));
+
+btnStart.addEventListener("click",addUser);
 
 
 let users = {
  
 }
+
 
 function addUser(event){
   let name = inputName.value;
@@ -30,12 +35,18 @@ function addUser(event){
   
   console.log(users);
   
+  hideStart()
   
   
   
 }
 
 
+function hideStart(){
+  
+  screenUserName.classList.add("hide");
+  screenGame.classList.remove("hide");
+}
 
 function User(){
   
@@ -49,7 +60,6 @@ function User(){
 }
   
 
-  
- 
-//
+//Playing Game
+
 
