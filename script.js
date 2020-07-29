@@ -24,14 +24,12 @@ let users = {};
 function start(event) {
   addUser();
   hideStart();
-
 }
 
 function addUser() {
   let name = inputName.value;
   users[name] = User();
   addScore(name);
- 
 }
 
 function hideStart() {
@@ -60,30 +58,33 @@ function addScore(name) {
 
 //Playing Game
 
-let letters =document.querySelectorAll(".game-letters > li");
+let letters = document.querySelectorAll(".game-letters > li");
+letters.forEach(el => {
+  el.addEventListener("click");
+});
+
+let arrayWords = [["Hola", "Mesa", "Boli", "Sapo"], ["Libro","Plato"]];
 
 
 
-let arraywords  = {
-  
-  fourLetters 
-  
-  
-}
-    
-    
-    
-
-/*function startGame(name){
+function startGame(name){
   
   const maxMistakes = 6;
   let mistakes = 0;
   
+  let numGames = 0 // to be substituted by rand function
   
-  
-  
-  while(!lose&&!win)
+  let currentWord = randWord(numGames);
 
 
+}
 
-*/
+
+function randWord(arrNum){
+  
+  
+  let Arrlength = arrayWords[arrNum].length
+  
+  let randPos = Math.floor(Math.random() * Arrlength);  
+
+}
