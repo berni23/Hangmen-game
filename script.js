@@ -42,8 +42,8 @@ function User() {
     playing: true,
     currentScore: undefined,
     elapsedTime: undefined,
-    victories: undefined,
-    matchesPlayed:
+    victories: 0,
+    matchesPlayed:0
   };
 }
 
@@ -67,33 +67,49 @@ letters.forEach(el => {
 let arrayWords = [["Hola", "Mesa", "Boli", "Sapo"], ["Libro", "Plato"]];
   
   
-//
+//returns an object to manage the game
 function newHangMen(user) {
-  const maxMistakes = 6;
+  const MAX_MISTAKES = 6;
   let mistakes = 0;
 
-  let numGames = 0; // to be substituted by rand function
+  // get a random word according to the difficulty of the match
+  let currentWord = randWord(user.matchesPlayed%arrayWords.length);
 
-  let currentWord = randWord(numGames);
   
-  
-  return ()
-  
+  return {
     
-    function
+ 
+     userWins() {
+       
+       return },
+    
+ 
+     mistakes: mistakes,
+    
+       
+     }
+    
   }
+
+//
+function start1(user) {
+  
+  
+  const game = newHangMen(user)
+
+  while(!game.wins() && !game.loses()){
+    
+  }
+  
+  
 }
-
-
-function start() {
   
-  
-  
-}
-  
-
+//Returns a random word from the arrayWords array
 function randWord(arrNum) {
-  let Arrlength = arrayWords[arrNum].length;
-
+  
+  let Arrlength = arrayWords[arrNum].length; 
+  
   let randPos = Math.floor(Math.random() * Arrlength);
+  
+  return arrayWords[arrNum][randPos];
 }
