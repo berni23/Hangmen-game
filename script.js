@@ -66,11 +66,11 @@ function addScore(name) {
 }
 
 //Playing Game
-
+/*
 let letters = document.querySelectorAll(".game-letters > li");
 letters.forEach(el => {
   el.addEventListener("click");
-});
+});*/
 
 let arrayWords = [["Hola", "Mesa", "Boli", "Sapo"], ["Libro", "Plato"]];
 
@@ -106,20 +106,26 @@ function newHangMen(user) {
   
   // add blanck spaces for guessed word
   currentWord.forEach(el=>{
-    let newSpace = documen
-    guessedWordLetters
+    let newSpace = document.createElement("li");
+    guessedWordLetters.appendChild(newSpace);
   });
+  //get created spaces
+  let displayedGuessedLetters = document.querySelectorAll(".word > li");
   
   let guessedWord = currentWord.map(el=>{return ""});
   
+  // check if a letter belongs to the word to be guessed, if so
   function tryLetter(letter){
-    if(currentWord.indexOf(letter)!==-1){
+    if(currentWord.indexOf(letter)!==-1){  
       currentWord.forEach((el,index)=>{
         if(el===letter){
           guessedWord[index] = el;
+          displayedGuessedLetters[index].textContent = letter;
         }
       });
       
+    }else{
+      mistakes++;
     }
       
   }

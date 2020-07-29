@@ -135,14 +135,17 @@ dt, dd{
 
 .word {
   display: flex;
+  margin-top:80px;
 }
 
 .word li{
   
   width:30px;
-  height:100px;
   border-bottom:7px solid black;
   margin-right:10px;
+  font-size:2rem;
+  font-weight:bold;
+
   
 }
 
