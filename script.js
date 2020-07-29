@@ -16,6 +16,9 @@ var btnStart = document.getElementById("button-start");
 var screenUserName = document.getElementById("screen-username");
 var screenGame = document.getElementById("screen-game");
 var scorePanel = document.getElementById("user-score-list");
+var screenEnd = document.getElementById("screen-end");
+var screenWin = document.getElementById("win-wrapper");
+var screenLose = document.getElementById("lose-wrapper");
 var guessedWordLetters = document.querySelector(".word");
 
 btnStart.addEventListener("click", start);
@@ -41,6 +44,18 @@ function hideStart() {
   screenGame.classList.remove("hide");
 }
 
+function showWin() {
+  screenGame.classList.add("hide");
+  screenEnd.classList.remove("hide");
+  screenWin.classList.remove("hide");
+}
+
+function showLose() {
+  screenGame.classList.add("hide");
+  screenEnd.classList.remove("hide");
+  screenLose.classList.remove("hide");
+}
+
 function User(username) {
   return {
     name: username,
@@ -62,31 +77,23 @@ function addScore(name) {
 }
 
 //Playing Game
-/*
+
 let letters = document.querySelectorAll(".game-letters > li");
 letters.forEach(el => {
-  el.addEventListener("click");
-});*/
+  el.addEventListener("click", handleLetter);
+});
 
 let arrayWords = [["Hola", "Mesa", "Boli", "Sapo"], ["Libro", "Plato"]];
 
-// addEventListener(click, handleLetter)
-
-// function to handel when user clicks a letter
 function handleLetter(event) {
   event.target.classList.add("hide");
 
-  let letter = event.target.innerHTML;
+  let letter = event.target.innerHTML; // A  // B //C letra que has pulsado
 
-  /*cHangmen.
-    
   cHangmen.addLetter(letter);
-  
-  if(cHangmen.checkEnd){
-    
+
+  if (cHangmen.userWins()) {
   }
-  
-  */
 }
 
 //returns an object to manage the actual game
@@ -126,7 +133,7 @@ function newHangMen(user) {
 
   return {
     userWins() {
-      return mistakes < MAX_MISTAKES && (counterLetters>=currentWord.length) 
+      return mistakes < MAX_MISTAKES && counterLetters >= currentWord.length;
     },
 
     userLoses() {
@@ -140,10 +147,7 @@ function newHangMen(user) {
 
 //Returns a random word from the arrayWords array
 function randWord(arrNum) {
-  // get a random word according to the difficulty of the match
   let Arrlength = arrayWords[arrNum].length;
-
   let randPos = Math.floor(Math.random() * Arrlength);
-
   return arrayWords[arrNum][randPos];
 }
