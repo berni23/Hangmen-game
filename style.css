@@ -122,3 +122,20 @@ button {
   margin-right:10px;
   
 }
+
+.game-letters{
+  display:flex;
+  flex-wrap:wrap;
+  
+}
+.game-letters li{
+  
+  margin: 5px 10px;
+  border-radius:3px;
+  background-color:#474747;
+  color:white;
+  text-align:center;
+  vertical-align:center;
+  
+  
+}
