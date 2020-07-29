@@ -1,12 +1,41 @@
 /* CSS files add styling rules to your content */
-
+*{
+  box-sizing:border-box;
+  margin:0;
+  padding:0;
+}
 body {
   font-family: helvetica, arial, sans-serif;
   margin: 2em;
   background-color:#f5f5f5;
+  display:flex;
+  max-width:1200px;
+  /* min-width*/
+}
+
+section{
+  
+  background-color:white;
 }
 
 h1 {
   font-style: italic;
   color: #373fff;
+}
+
+
+.hide{
+  
+  display:none;
+}
+
+.container-left{
+  
+  width:70vw;
+  height: 42vw;
+}
+
+.container-right{
+  
+  width:25%;
 }
