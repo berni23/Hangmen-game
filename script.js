@@ -38,6 +38,7 @@ function addUser() {
   addScore(name);
   cHangmen = newHangMen(users[name]);
   
+  
 }
 
 function hideStart() {
@@ -83,6 +84,7 @@ function handleLetter(event) {
   
 
   let letter = event.target.innerHTML;
+  cHangmen.
     /*
   cHangmen.addLetter(letter);
   
@@ -114,7 +116,7 @@ function newHangMen(user) {
   
   let guessedWord = currentWord.map(el=>{return ""});
   
-  // check if a letter belongs to the word to be guessed, if so
+  // check if a letter belongs to the word to be guessed, if so display the guessed letter
   function tryLetter(letter){
     if(currentWord.indexOf(letter)!==-1){  
       currentWord.forEach((el,index)=>{
@@ -129,6 +131,7 @@ function newHangMen(user) {
     }
       
   }
+
   
   
   
@@ -136,27 +139,16 @@ function newHangMen(user) {
 
   return {
     userWins() {
-      return; // bool
+      return mistakes < MAX_MISTAKES; // bool
     },
 
     userLoses() {
-      return mistakes > MAX_MISTAKES;
-    },
-
-    addMistakes() {
-      mistakes++;
-    },
+      return mistakes >= MAX_MISTAKES;
+    },addLetter(letter){
+      tryLetter(letter);
+    }
     
-    getCurrentWord(){
-      
-      return currentWord
-      
-    },
     
-     getGuessed(letter){
-   
-       
-     }
       
     }
     
