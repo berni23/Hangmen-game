@@ -20,16 +20,22 @@ var scorePanel = document.getElementById("user-score-list");
 btnStart.addEventListener("click", start);
 
 let users = {};
+let currentUser;
+let currentHangmen;
+
 
 function start(event) {
   addUser();
   hideStart();
+  
 }
 
 function addUser() {
   let name = inputName.value;
-  users[name] = User();
+  users[name] = User(name);
   addScore(name);
+  currentHangmen = newHangMen(users[name]);
+  
 }
 
 function hideStart() {
@@ -37,8 +43,9 @@ function hideStart() {
   screenGame.classList.remove("hide");
 }
 
-function User() {
+function User(username) {
   return {
+    name: username,
     playing: true,
     currentScore: undefined,
     elapsedTime: undefined,
@@ -66,18 +73,22 @@ letters.forEach(el => {
 
 let arrayWords = [["Hola", "Mesa", "Boli", "Sapo"], ["Libro", "Plato"]];
 
-// addEventListener(click, handleEvent)
+// addEventListener(click, handleLetter)
 
-// hide key,
-function handleEvent() {}
+
+function handleLetter(event) {
+  event.target.classList.add("hide");
+  
+  
+  
+  //event.target.innerHTML;
+  
+}
 
 //returns an object to manage the actual game
 function newHangMen(user) {
   const MAX_MISTAKES = 6;
   let mistakes = 0;
-  
-  let alphabet = "abcdefghijklmnopqrstuvwxyz".split("");
-
   // get a random word according to the difficulty of the match
   let currentWord = randWord(user.matchesPlayed % arrayWords.length);
 
@@ -102,10 +113,12 @@ function newHangMen(user) {
   };
 }
 
+
 //
 function start1(user) {
-  const game = newHangMen(user);
   
+  
+  const game = newHangMen(user);
 
   while (!game.wins() && !game.loses()) {}
 }
