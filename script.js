@@ -15,21 +15,37 @@ alphabet.forEach(letter => {
 
 
 
+var users = {
   
-  antonio:{
-    
-    playing: true / false
-    
-   
-  }
-  }
-function Users(){
   
-  function User(){
+ addUser : function(){}
+  
+  
+
+}
+
+
+
+ obj.key3 = "value3";
+
+let sers = {
+   currentGame:0,
+   User: function(username,){
     this.username;
-    this.
+    this.elapsedTime;
+  },
+  ranking: function(){
+    
   }
+}
+
+function User(){
   
 }
+  
+
+
+  
+ 
 //
 
