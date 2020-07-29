@@ -1,6 +1,7 @@
-var alphabet = "abcdefghijklmnopqrstuvwxyz".split("");
 
-console.log(alphabet);
+// complete html 
+
+var alphabet = "abcdefghijklmnopqrstuvwxyz".split("");
 
 let gameLetters = document.querySelector(".game-letters")
 
@@ -10,4 +11,25 @@ alphabet.forEach(letter => {
   newLetter.innerHTML = letter.toUpperCase();
   gameLetters.appendChild(newLetter);
 });
+
+
+
+
+  
+  antonio:{
+    
+    playing: true / false
+    
+   
+  }
+  }
+function Users(){
+  
+  function User(){
+    this.username;
+    this.
+  }
+  
+}
+//
 
