@@ -16,13 +16,7 @@ body {
   /* min-width*/
 }
 
-.container{
-  width:100%;
-  display: flex;
-  align-items:center;
-  justify-content: space-between;
-  
-}
+
 
 section{
   
@@ -36,8 +30,37 @@ h1 {
   color: #373fff;
 }
 
-h2 
+h2 {
+  padding-bottom : 24px;
+}
 
+input {
+  display: block;
+  border: 2px solid black;
+  width:100%;
+  height:25px;
+  border-radius: 3px;
+  margin: 10px 0px;
+}
+
+button{
+  width:100%;
+  height:25px;
+  background-color: black;
+  color: white;
+  border: 0px;
+  border-radius: 3px;
+  margin: 10px 0px;
+  
+}
+
+.container{
+  width:100%;
+  display: flex;
+  align-items:center;
+  justify-content: space-between;
+  
+}
 
 .hide{
   
@@ -73,5 +96,20 @@ h2
 .game-wrapper{
   
 display:flex;
+justify-content:space
+  
+
 }
 
+
+.hangman{
+  
+  
+}
+
+.guess-word{
+
+  
+  
+}
+         
