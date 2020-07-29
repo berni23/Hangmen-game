@@ -12,38 +12,35 @@ alphabet.forEach(letter => {
   gameLetters.appendChild(newLetter);
 });
 
+// Start Game
+
+var btnStart =  document.getElementById("button-start");
+
+btnStart.addEventListener("click",addUser);
 
 
-
-var users = {
-  
-  
- addUser : function(){}
-  
-  
-
+let users = {
+ 
 }
 
-
-
- obj.key3 = "value3";
-
-let sers = {
-   currentGame:0,
-   User: function(username,){
-    this.username;
-    this.elapsedTime;
-  },
-  ranking: function(){
-    
-  }
+function addUser(name){
+  
+  users[name] = User();
+  
+  console.log(users);
+  
 }
 
 function User(){
   
+  return {
+  currentScore:undefined,
+  elapsedTime:undefined,
+  victories:undefined
+  }
+  
 }
   
-
 
   
  
