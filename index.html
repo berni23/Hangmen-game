@@ -14,24 +14,35 @@
     <script src="/script.js" defer></script>
   </head>
   <body>
-    <section class="container-left">
-      <div id="screen-username" class="">
-        <h2> Choose a user name</h2>
-        <label>User name</label>
-        <input>
-        <button></button>
-      </div>
-      <div id="screen-game" class="hide"></div>
-      <div id="screen-end" class="hide"></div>
-    </section>
-    <section id="user-scores" class="container-right">
-      <h3>
-        User Scores
-      </h3>
-
-      <dl>
-        <!-- To be filled using javascript-->
-      </dl>
-    </section>
+    <div class="container">
+      <section class="container-left">
+        <div id="screen-username" class="">
+          <h2>Choose a user name</h2>
+          <label>User name</label>
+          <input />
+          <button></button>
+        </div>
+        <div id="screen-game" class="hide">
+          <div class="game-wrapper">
+            <div class="hangman"></div>
+            <div class="guess-word">
+              <h3>
+                Guess the word
+              </h3>
+              <div class="word"></div>
+            </div>
+          </div>
+          <div id="screen-end" class="hide"></div>
+        </div>
+      </section>
+      <section id="user-scores" class="container-right">
+        <h3>
+          User Scores
+        </h3>
+        <dl>
+          <!-- To be filled using javascript-->
+        </dl>
+      </section>
+    </div>
   </body>
 </html>
