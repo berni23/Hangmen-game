@@ -35,7 +35,9 @@ h2 {
   padding-bottom: 24px;
 }
 
-
+h3 {
+  margin: 50px 0px;
+}
 
 input {
   display: block;
