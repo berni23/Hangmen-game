@@ -21,7 +21,7 @@ btnStart.addEventListener("click", start);
 
 let users = {};
 let currentUser;
-let currentHangmen;
+let cHangmen;
 
 
 function start(event) {
@@ -34,7 +34,7 @@ function addUser() {
   let name = inputName.value;
   users[name] = User(name);
   addScore(name);
-  currentHangmen = newHangMen(users[name]);
+  cHangmen = newHangMen(users[name]);
   
 }
 
@@ -79,19 +79,31 @@ let arrayWords = [["Hola", "Mesa", "Boli", "Sapo"], ["Libro", "Plato"]];
 function handleLetter(event) {
   event.target.classList.add("hide");
   
+  let letter = event.target.innerHTML;
   
-  
-  //event.target.innerHTML;
+  // addLetter
+  // printLetter
+  //checkEND
   
 }
+
+
+
 
 //returns an object to manage the actual game
 function newHangMen(user) {
   const MAX_MISTAKES = 6;
   let mistakes = 0;
   // get a random word according to the difficulty of the match
-  let currentWord = randWord(user.matchesPlayed % arrayWords.length);
-
+  let currentWord = randWord(user.matchesPlayed % arrayWords.length).split("");
+  
+  let guessed = currentWord.map(el=>{ return ""});
+  
+  function tryLetter(letter){
+    return currentWord.indexOf(letter);
+      
+  }
+  
   // function
 
   return {
@@ -106,12 +118,21 @@ function newHangMen(user) {
     addMistakes() {
       mistakes++;
     },
-
-    getMistakes() {
-      return mistakes;
+    
+    getCurrentWord(){
+      
+      return currentWord
+      
+    },
+    
+     updateGuessed(letter){
+   
+       
+     }
+      
     }
+    
   };
-}
 
 
 //
