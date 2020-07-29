@@ -26,7 +26,7 @@ btnStart.addEventListener("click", start);
 
 let users = {};
 let currentUser;
-let cHangmen;
+let currentHangMen;
 let timerIni;
 
 function start(event) {
@@ -41,7 +41,7 @@ function addUser() {
   let name = inputName.value;
   users[name] = User(name);
   addScore(name);
-  cHangmen = newHangMen(users[name]);
+  currentHangMen = newHangMen(users[name]);
 }
 
 function hideStart() {
@@ -89,21 +89,21 @@ letters.forEach(el => {
   el.addEventListener("click", handleLetter);
 });
 
-let arrayWords = [["Hola", "Mesa", "Boli", "Sapo"], ["Libro", "Plato"]];
+let arrayWords = [["hola", "mesa", "boli", "sapo","agua"], ["libro", "plato","gorra"]];
 
 function handleLetter(event) {
   event.target.classList.add("hide");
   let letter = event.target.innerHTML;
   let timerEnd;
-  cHangmen.addLetter(letter);
+  currentHangMen.addLetter(letter);
 
-  if (cHangmen.userWins()) {
+  if (currentHangMen.userWins()) {
     let currentTimer = new Date();
     timerEnd = ((currentTimer.getTime() - timerIni) / 1000).toFixed(0);
-    //console.log(timerEnd);
-    cHangmen.updateTime(timerEnd);
-    //showWin(timerEnd);
-  } else if (cHangmen.userLoses()) {
+    currentHangMen.updateTime(timerEnd);
+    showWin(timerEnd);
+    currentHangMen.addMatchesPlayed();
+  } else if (currentHangMen.userLoses()) {
     showLose();
   }
 }
@@ -112,24 +112,17 @@ function handleLetter(event) {
 function newHangMen(user) {
   const MAX_MISTAKES = 6;
   let mistakes = 0;
-
   let currentWord = randWord(user.matchesPlayed % arrayWords.length).split("");
   let counterLetters = 0;
-
   currentWord.forEach(el => {
     let newSpace = document.createElement("li");
     guessedWordLetters.appendChild(newSpace);
   });
-
-  //get created spaces
   let displayedGuessedLetters = document.querySelectorAll(".word > li");
-
-  // check if a letter belongs to the word to be guessed, if so display the guessed letter
   function tryLetter(letter) {
     if (currentWord.indexOf(letter) !== -1) {
       currentWord.forEach((el, index) => {
         if (el === letter) {
-          //guessedWord[index] = el;
           displayedGuessedLetters[index].textContent = letter;
           counterLetters++;
         }
@@ -139,8 +132,6 @@ function newHangMen(user) {
       // siguiente frame del hangmen
     }
   }
-
-  // function
 
   return {
     userWins() {
@@ -154,7 +145,7 @@ function newHangMen(user) {
     },
 
     updateTime(time) {
-      user.currentTime = time;
+      user.currentScore = time;
     },
 
     addMatchesPlayed() {
