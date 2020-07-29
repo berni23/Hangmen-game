@@ -20,6 +20,7 @@ var screenEnd = document.getElementById("screen-end");
 var screenWin = document.getElementById("win-wrapper");
 var screenLose = document.getElementById("lose-wrapper");
 var guessedWordLetters = document.querySelector(".word");
+var winTime = document.getElementById("win-time");
 
 btnStart.addEventListener("click", start);
 
@@ -31,11 +32,9 @@ let timerIni;
 function start(event) {
   addUser();
   hideStart();
-  
-  let currentTimer = new Date();
-  timerIni =currentTimer.getTime();
 
-  
+  let currentTimer = new Date();
+  timerIni = currentTimer.getTime();
 }
 
 function addUser() {
@@ -50,10 +49,11 @@ function hideStart() {
   screenGame.classList.remove("hide");
 }
 
-function showWin() {
+function showWin(timerEnd) {
   screenGame.classList.add("hide");
   screenEnd.classList.remove("hide");
   screenWin.classList.remove("hide");
+  winTime.textContent = "You won in " + timerEnd + " seconds!";
 }
 
 function showLose() {
@@ -93,22 +93,18 @@ let arrayWords = [["Hola", "Mesa", "Boli", "Sapo"], ["Libro", "Plato"]];
 
 function handleLetter(event) {
   event.target.classList.add("hide");
-  let letter = event.target.innerHTML; 
+  let letter = event.target.innerHTML;
   let timerEnd;
   cHangmen.addLetter(letter);
 
   if (cHangmen.userWins()) {
-    
-    showWin();
     let currentTimer = new Date();
-    timerEnd = ((currentTimer.getTime() - timerIni)/1000).toFixed(2);
+    timerEnd = ((currentTimer.getTime() - timerIni) / 1000).toFixed(0);
+    //console.log(timerEnd);
     cHangmen.updateTime(timerEnd);
-    
-  }
-  
-  else if(cHangmen.userLoses()){
-     showLose();
-    
+    //showWin(timerEnd);
+  } else if (cHangmen.userLoses()) {
+    showLose();
   }
 }
 
@@ -123,7 +119,6 @@ function newHangMen(user) {
   currentWord.forEach(el => {
     let newSpace = document.createElement("li");
     guessedWordLetters.appendChild(newSpace);
- 
   });
 
   //get created spaces
@@ -140,18 +135,16 @@ function newHangMen(user) {
         }
       });
     } else {
-      mistakes++; 
-       // siguiente frame del hangmen
+      mistakes++;
+      // siguiente frame del hangmen
     }
   }
 
   // function
 
   return {
-    
-    
     userWins() {
-      return (mistakes <= MAX_MISTAKES) && (counterLetters >= currentWord.length);
+      return mistakes <= MAX_MISTAKES && counterLetters >= currentWord.length;
     },
     userLoses() {
       return mistakes > MAX_MISTAKES;
@@ -159,8 +152,8 @@ function newHangMen(user) {
     addLetter(letter) {
       tryLetter(letter);
     },
-    
-    updateTime(time){
+
+    updateTime(time) {
       user.currentTime = time;
     }
   };
@@ -172,3 +165,16 @@ function randWord(arrNum) {
   let randPos = Math.floor(Math.random() * Arrlength);
   return arrayWords[arrNum][randPos].toUpperCase();
 }
+
+
+
+/* TO DO LIST
+
+1 - Implement play again feature ( more difficult word each time);
+2 - Display result in the right;
+3 - HandMan;
+
+
+*/
+
+
