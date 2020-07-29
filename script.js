@@ -42,7 +42,8 @@ function User() {
     playing: true,
     currentScore: undefined,
     elapsedTime: undefined,
-    victories: undefined
+    victories: undefined,
+    matchesPlayed:
   };
 }
 
@@ -63,28 +64,36 @@ letters.forEach(el => {
   el.addEventListener("click");
 });
 
-let arrayWords = [["Hola", "Mesa", "Boli", "Sapo"], ["Libro","Plato"]];
-
-
-
-function startGame(name){
+let arrayWords = [["Hola", "Mesa", "Boli", "Sapo"], ["Libro", "Plato"]];
   
+  
+//
+function newHangMen(user) {
   const maxMistakes = 6;
   let mistakes = 0;
-  
-  let numGames = 0 // to be substituted by rand function
-  
+
+  let numGames = 0; // to be substituted by rand function
+
   let currentWord = randWord(numGames);
-
-
+  
+  
+  return ()
+  
+    
+    function
+  }
 }
 
 
-function randWord(arrNum){
+function start() {
   
   
-  let Arrlength = arrayWords[arrNum].length
   
-  let randPos = Math.floor(Math.random() * Arrlength);  
+}
+  
 
+function randWord(arrNum) {
+  let Arrlength = arrayWords[arrNum].length;
+
+  let randPos = Math.floor(Math.random() * Arrlength);
 }
