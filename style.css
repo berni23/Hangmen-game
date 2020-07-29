@@ -27,13 +27,16 @@ body {
 section{
   
   background-color:white;
-  border-radius:20px;
+  border-radius: 15px;
+  box-shadow: 0 0 10px grey; 
 }
 
 h1 {
   font-style: italic;
   color: #373fff;
 }
+
+h2 
 
 
 .hide{
@@ -45,6 +48,9 @@ h1 {
   
   width:840px;
   height:520px;
+  display:flex;
+  justify-content:center;
+  align-items: center;
   
 }
 
@@ -55,13 +61,17 @@ h1 {
 }
 
 
+#screen-username{
+  
+  padding:auto;
+}
+
+
 
 /* game-screen*/
 
-
-
 .game-wrapper{
   
-
 display:flex;
 }
+
