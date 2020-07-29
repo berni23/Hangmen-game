@@ -155,18 +155,21 @@ function newHangMen(user) {
 
     updateTime(time) {
       user.currentTime = time;
+    },
+
+    addMatchesPlayed() {
+      user.matchesPLayed++;
     }
   };
 }
 
 //Returns a random word from the arrayWords array
+
 function randWord(arrNum) {
   let Arrlength = arrayWords[arrNum].length;
   let randPos = Math.floor(Math.random() * Arrlength);
   return arrayWords[arrNum][randPos].toUpperCase();
 }
-
-
 
 /* TO DO LIST
 
@@ -176,5 +179,3 @@ function randWord(arrNum) {
 
 
 */
-
-
