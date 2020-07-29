@@ -84,8 +84,9 @@ function handleLetter(event) {
   
 
   let letter = event.target.innerHTML;
-  cHangmen.
-    /*
+  
+  /*cHangmen.
+    
   cHangmen.addLetter(letter);
   
   if(cHangmen.checkEnd){
@@ -93,7 +94,6 @@ function handleLetter(event) {
   }
   
   */
-  
 }
 
 

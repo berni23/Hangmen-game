@@ -36,7 +36,7 @@ h2 {
 }
 
 h3 {
-  margin: 50px 0px;
+  margin-bottom: 40px;
 }
 
 input {
@@ -63,8 +63,13 @@ dl {
   flex-direction: column;
 }
 
-dt, dd{
+dd{
   padding-bottom:20px;
+}
+
+dt{
+  padding-bottom:20px;
+  font-weight: bold;
 }
 
 .container {
@@ -91,8 +96,8 @@ dt, dd{
   height: 520px;
   display: flex;
   flex-direction:column;
-  justify-content: top;
-  align-items: center;
+  justify-content: flex-start;
+  padding:50px
 }
 
 #screen-username {
