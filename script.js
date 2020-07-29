@@ -16,6 +16,7 @@ var btnStart = document.getElementById("button-start");
 var screenUserName = document.getElementById("screen-username");
 var screenGame = document.getElementById("screen-game");
 var scorePanel = document.getElementById("user-score-list");
+var guessedWordLetters = document.querySelector(".word");
 
 btnStart.addEventListener("click", start);
 
@@ -27,6 +28,7 @@ let cHangmen;
 function start(event) {
   addUser();
   hideStart();
+  
   
 }
 
@@ -55,7 +57,6 @@ function User(username) {
 }
 
 function addScore(name) {
-  // dt , dd
   let newScoreName = document.createElement("dt");
   let newScoreCurrent = document.createElement("dd");
   newScoreName.innerHTML = name;
@@ -75,15 +76,21 @@ let arrayWords = [["Hola", "Mesa", "Boli", "Sapo"], ["Libro", "Plato"]];
 
 // addEventListener(click, handleLetter)
 
-
+// function to handel when user clicks a letter
 function handleLetter(event) {
   event.target.classList.add("hide");
   
-  let letter = event.target.innerHTML;
   
-  // addLetter
-  // printLetter
-  //checkEND
+
+  let letter = event.target.innerHTML;
+    /*
+  cHangmen.addLetter(letter);
+  
+  if(cHangmen.checkEnd){
+    
+  }
+  
+  */
   
 }
 
@@ -97,12 +104,27 @@ function newHangMen(user) {
   // get a random word according to the difficulty of the match
   let currentWord = randWord(user.matchesPlayed % arrayWords.length).split("");
   
-  let guessed = currentWord.map(el=>{ return ""});
+  // add blanck spaces for guessed word
+  currentWord.forEach(el=>{
+    let newSpace = documen
+    guessedWordLetters
+  });
+  
+  let guessedWord = currentWord.map(el=>{return ""});
   
   function tryLetter(letter){
-    return currentWord.indexOf(letter);
+    if(currentWord.indexOf(letter)!==-1){
+      currentWord.forEach((el,index)=>{
+        if(el===letter){
+          guessedWord[index] = el;
+        }
+      });
+      
+    }
       
   }
+  
+  
   
   // function
 
@@ -125,7 +147,7 @@ function newHangMen(user) {
       
     },
     
-     updateGuessed(letter){
+     getGuessed(letter){
    
        
      }
@@ -135,14 +157,6 @@ function newHangMen(user) {
   };
 
 
-//
-function start1(user) {
-  
-  
-  const game = newHangMen(user);
-
-  while (!game.wins() && !game.loses()) {}
-}
 
 //Returns a random word from the arrayWords array
 function randWord(arrNum) {
