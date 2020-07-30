@@ -18,6 +18,7 @@ var screenWin = document.getElementById("win-wrapper");
 var screenLose = document.getElementById("lose-wrapper");
 var guessedWordLetters = document.querySelector(".word");
 var winTime = document.getElementById("win-time");
+var loseTime = document.getElementById("lose-time");
 var hangmanImg = document.getElementById("hangman-img");
 
 btnStart.addEventListener("click", start);
@@ -38,7 +39,7 @@ function start(event) {
 function addUser() {
   let name = inputName.value;
   users[name] = User(name);
-  addScore(name);
+  addScore(name, "Currently Playing");
   currentHangMen = newHangMen(users[name]);
 }
 
@@ -54,11 +55,11 @@ function showWin(timerEnd) {
   winTime.textContent = "You won in " + timerEnd + " seconds!";
 }
 
-function showLose() {
+function showLose(timerEnd) {
   screenGame.classList.add("hide");
   screenEnd.classList.remove("hide");
   screenLose.classList.remove("hide");
-  //winTime.textContent = "You lost in " + timerEnd + " seconds!";
+  loseTime.textContent = "You lost in " + timerEnd + " seconds!";
 }
 
 function User(username) {
@@ -72,11 +73,11 @@ function User(username) {
   };
 }
 
-function addScore(name) {
+function addScore(name, score) {
   let newScoreName = document.createElement("dt");
   let newScoreCurrent = document.createElement("dd");
   newScoreName.innerHTML = name;
-  newScoreCurrent.innerHTML = "Currently playing";
+  newScoreCurrent.innerHTML = score;
   scorePanel.insertAdjacentElement("afterbegin", newScoreCurrent);
   scorePanel.insertAdjacentElement("afterbegin", newScoreName);
 }
@@ -107,6 +108,7 @@ function handleLetter(event) {
     currentHangMen.addMatchesPlayed();
   } else if (currentHangMen.userLoses()) {
     let time = setTimeout(showLast, 3000);
+    currentHangMen.updateTime("user has lost");
   }
 }
 
@@ -165,6 +167,7 @@ function newHangMen(user) {
     },
     updateTime(time) {
       user.currentScore = time;
+      addScore(user[name], time);
     },
     addMatchesPlayed() {
       user.matchesPLayed++;
@@ -180,6 +183,7 @@ function randWord(arrNum) {
 
 /* TO DO LIST
 
+0 - implement losing time
 1 - Implement play again feature ( more difficult word each time);
 2 - Display result in the right;
 
