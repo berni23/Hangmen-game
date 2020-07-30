@@ -18,6 +18,7 @@ var screenWin = document.getElementById("win-wrapper");
 var screenLose = document.getElementById("lose-wrapper");
 var guessedWordLetters = document.querySelector(".word");
 var winTime = document.getElementById("win-time");
+var hangmanImg = document.getElementById("hangman-img");
 
 btnStart.addEventListener("click", start);
 
@@ -86,7 +87,11 @@ letters.forEach(el => {
   el.addEventListener("click", handleLetter);
 });
 
-let arrayWords = [["hola", "mesa", "boli", "sapo","agua"], ["libro", "plato","gorra"],["guante","piedra"]];
+let arrayWords = [
+  ["hola", "mesa", "boli", "sapo", "agua"],
+  ["libro", "plato", "gorra"],
+  ["guante", "piedra"]
+];
 
 function handleLetter(event) {
   event.target.classList.add("hide");
@@ -110,6 +115,7 @@ function newHangMen(user) {
   let currentWord = randWord(user.matchesPlayed % arrayWords.length).split("");
   let counterLetters = 0;
   let currentFrame = 0;
+  let intervalFrame;
   currentWord.forEach(el => {
     let newSpace = document.createElement("li");
     guessedWordLetters.appendChild(newSpace);
@@ -125,17 +131,21 @@ function newHangMen(user) {
       });
     } else {
       mistakes++;
-      let intervalFrame = setInterval(displayFrames,200);
+      intervalFrame = setInterval(displayFrames, 200);
+    }
+  }
+
+  function displayFrames() {
+    hangmanImg.src = "frames_hangmen/mistake" + mistakes + "/frame000" + currentFrame + ".png";
+    
+    console.log(hangmanImg.src);
+
+    currentFrame++;
+    if (currentFrame >= 5) {
+      clearInterval(intervalFrame);
       currentFrame = 0;
     }
   }
-  
-  
-function displayFrames(){
-  
-  
-  
-}
 
   return {
     userWins() {
@@ -169,4 +179,3 @@ function randWord(arrNum) {
 3 - HandMan;
 
 */
-
