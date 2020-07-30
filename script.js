@@ -105,9 +105,15 @@ function handleLetter(event) {
     showWin(timerEnd);
     currentHangMen.addMatchesPlayed();
   } else if (currentHangMen.userLoses()) {
-    showLose();
+    
+    let time = setTimeout(() =>hangmanImg.src = "frames_hangmen/mistake7/frame_last",3500);
+    let timeShowLose = setTimeout(showLose,1000);
+    //showLose();
   }
 }
+
+
+
 //returns an object to manage the actual game
 function newHangMen(user) {
   const MAX_MISTAKES = 6;
@@ -137,7 +143,6 @@ function newHangMen(user) {
 
   function displayFrames() {
     hangmanImg.src = "frames_hangmen/mistake" + mistakes + "/frame000" + currentFrame + ".png";
-    
     console.log(hangmanImg.src);
 
     currentFrame++;
