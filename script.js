@@ -1,6 +1,8 @@
 var alphabet = "abcdefghijklmnopqrstuvwxyzñ".split("");
 var gameLetters = document.querySelector(".game-letters");
 
+//create containers with the letters and add them in the html
+
 function resetLetters() {
   gameLetters.innerHTML = "";
   alphabet.forEach(letter => {
@@ -14,6 +16,7 @@ function resetLetters() {
     el.addEventListener("click", handleLetter);
   });
 }
+
 // Start Game
 var inputName = document.getElementById("user-name");
 var btnStart = document.getElementById("button-start");
@@ -38,20 +41,17 @@ let users = {};
 let currentUser;
 let currentHangMen;
 let timerIni;
-
 let canLose = true;
 
 function start(event) {
-  
-  if (inputName.value!=""){
-  addUser();
-  hideStart();
-  resetLetters();
+  if (inputName.value != "") {
+    addUser();
+    hideStart();
+    resetLetters();
 
-  let currentTimer = new Date();
-  timerIni = currentTimer.getTime();
-}
-  
+    let currentTimer = new Date();
+    timerIni = currentTimer.getTime();
+  }
 }
 
 //new match with the same user
@@ -63,12 +63,14 @@ function playAgain(event) {
   reset();
 }
 
+//new match asking for a new user
 function restart(event) {
   screenEnd.classList.add("hide");
   screenWin.classList.add("hide");
   screenLose.classList.add("hide");
   screenUserName.classList.remove("hide");
   if (currentUser.currentScore === undefined) {
+    // remove user to the score table if he/she lost ( only users who won)
     scorePanel.firstChild.remove();
     scorePanel.firstChild.remove();
   }
@@ -106,9 +108,12 @@ function showLose(timerEnd) {
 }
 
 // function for displaying the last image in the hangmen
+
 function showLast(timerEnd) {
   hangmanImg.src = "frames_hangmen/mistake7/frame_last.png";
-  let timeShowLose = setTimeout(() => {showLose(timerEnd);}, 1200);
+  let timeShowLose = setTimeout(() => {
+    showLose(timerEnd);
+  }, 1200);
 }
 
 function User(username) {
@@ -137,19 +142,7 @@ function updateScore(score) {
 
 //Playing Game
 
-let arrayWords = [
-  ["hola", "mesa", "boli", "sapo", "agua"],
-  ["libro", "plato", "gorra"],
-  ["guante", "piedra", "digito"],
-  ["gigante,", "guadaña,"]
-];
-
-function tEnd() {
-  let currentTimer = new Date();
-  let timerEnd = ((currentTimer.getTime() - timerIni) / 1000).toFixed(0);
-  return timerEnd;
-}
-
+// function  connected to each letter ( line 14 ) to update the currenthangMen at each event and hide the letter
 
 function handleLetter(event) {
   event.target.classList.add("hide");
@@ -168,15 +161,15 @@ function handleLetter(event) {
   } else if (currentHangMen.userLoses() && canLose) {
     canLose = false;
     timerEnd = tEnd();
-    let time = setTimeout(() => {showLast(timerEnd);}, 4000);
+    let time = setTimeout(() => {
+      showLast(timerEnd);
+    }, 4000);
     currentHangMen.addMatchesPlayed();
-    
   }
 }
 
-
-
 //returns an object to manage the actual game
+
 function newHangMen(user) {
   const MAX_MISTAKES = 6;
   let mistakes = 0;
@@ -190,7 +183,7 @@ function newHangMen(user) {
     guessedWordLetters.appendChild(newSpace);
   });
   let displayedGuessedLetters = document.querySelectorAll(".word > li");
-  
+
   function tryLetter(letter) {
     if (currentWord.indexOf(letter) !== -1) {
       currentWord.forEach((el, index) => {
@@ -209,7 +202,8 @@ function newHangMen(user) {
   }
 
   function displayFrames() {
-    hangmanImg.src = "frames_hangmen/mistake" + mistakes + "/frame000" + currentFrame + ".png";
+    hangmanImg.src =
+      "frames_hangmen/mistake" + mistakes + "/frame000" + currentFrame + ".png";
     currentFrame++;
     if (currentFrame >= 5) {
       clearInterval(intervalFrame);
@@ -241,8 +235,18 @@ function newHangMen(user) {
   };
 }
 
+// UTILS functions
 
-// get a random word from the nth array of the bidimensional array 
+// array of words
+
+let arrayWords = [
+  ["hola", "mesa", "boli", "sapo", "agua"],
+  ["libro", "plato", "gorra"],
+  ["guante", "piedra", "digito"],
+  ["gigante,", "guadaña,"]
+];
+
+// get a random word from the nth array of the bidimensional array
 
 function randWord(arrNum) {
   let Arrlength = arrayWords[arrNum].length;
@@ -250,17 +254,21 @@ function randWord(arrNum) {
   return arrayWords[arrNum][randPos].toUpperCase();
 }
 
+function tEnd() {
+  let currentTimer = new Date();
+  let timerEnd = ((currentTimer.getTime() - timerIni) / 1000).toFixed(0);
+  return timerEnd;
+}
 
-
-// reset functions 
-
+// reset functions
 
 function resetWord() {
   guessedWordLetters.innerHTML = "";
 }
 
 function resetImg() {
-  hangmanImg.src ="https://cdn.glitch.com/9c8d0bb5-abdb-4e8f-a289-be65a38e37c9%2FhangmenBlank.png?v=1596093417835";
+  hangmanImg.src =
+    "https://cdn.glitch.com/9c8d0bb5-abdb-4e8f-a289-be65a38e37c9%2FhangmenBlank.png?v=1596093417835";
 }
 
 function resetInput() {
