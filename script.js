@@ -59,10 +59,14 @@ function playAgain(event) {
 
 function restart(event) {
   screenEnd.classList.add("hide");
-
   screenWin.classList.add("hide");
   screenLose.classList.add("hide");
   screenUserName.classList.remove("hide");
+  if(currentUser.currentScore === undefined){
+    scorePanel.firstChild.remove();
+    scorePanel.firstChild.remove();
+  }
+
   reset();
 }
 
@@ -90,6 +94,7 @@ function addUser() {
   users[name] = User(name);
   addScore(name, "Currently Playing");
   currentHangMen = newHangMen(users[name]);
+  currentUser=users[name];
 }
 
 function hideStart() {
@@ -166,8 +171,7 @@ function handleLetter(event) {
     timerEnd = tEnd();
     let time = setTimeout(showLast(timerEnd), 3000);
     currentHangMen.addMatchesPlayed();
-    scorePanel.firstChild.remove();
-    scorePanel.firstChild.remove();
+    currentHangMen.addVictories();
     resetWord();
   }
 }
@@ -185,7 +189,7 @@ function newHangMen(user) {
   let counterLetters = 0;
   let currentFrame = 0;
   let intervalFrame;
-  //let frames = true;
+  let frames = true;
   currentWord.forEach(el => {
     let newSpace = document.createElement("li");
     guessedWordLetters.appendChild(newSpace);
@@ -203,24 +207,22 @@ function newHangMen(user) {
       mistakes++;
       console.log("mistakes",mistakes);
 
-        //frames
-      
+        if(frames){
         intervalFrame = setInterval(displayFrames, 200);
-        //frames = false;
-        
-       // console.log("frames",frames);
+        frames = false;
+        console.log("frames",frames);
       }
+    }
     }
 
   function displayFrames() {
     hangmanImg.src =
       "frames_hangmen/mistake" + mistakes + "/frame000" + currentFrame + ".png";
-    console.log(hangmanImg.src);
     currentFrame++;
     if (currentFrame >= 5) {
       clearInterval(intervalFrame);
       currentFrame = 0;
-      //frames = true;
+      frames = true;
     }
   }
 
