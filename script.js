@@ -42,12 +42,16 @@ let timerIni;
 let canLose = true;
 
 function start(event) {
+  
+  if (inputName.value!=""){
   addUser();
   hideStart();
   resetLetters();
 
   let currentTimer = new Date();
   timerIni = currentTimer.getTime();
+}
+  
 }
 
 //new match with the same user
@@ -69,25 +73,6 @@ function restart(event) {
     scorePanel.firstChild.remove();
   }
   reset();
-}
-
-function resetWord() {
-  guessedWordLetters.innerHTML = "";
-}
-
-function resetImg() {
-  hangmanImg.src =
-    "https://cdn.glitch.com/9c8d0bb5-abdb-4e8f-a289-be65a38e37c9%2FhangmenBlank.png?v=1596093417835";
-}
-
-function resetInput() {
-  inputName.value = "";
-}
-
-function reset() {
-  resetLetters();
-  resetImg();
-  resetInput();
 }
 
 function addUser() {
@@ -118,6 +103,12 @@ function showLose(timerEnd) {
   loseTime.textContent = "You lost in " + timerEnd + " seconds!";
   resetWord();
   canLose = true;
+}
+
+// function for displaying the last image in the hangmen
+function showLast(timerEnd) {
+  hangmanImg.src = "frames_hangmen/mistake7/frame_last.png";
+  let timeShowLose = setTimeout(() => {showLose(timerEnd);}, 1200);
 }
 
 function User(username) {
@@ -183,10 +174,7 @@ function handleLetter(event) {
   }
 }
 
-function showLast(timerEnd) {
-  hangmanImg.src = "frames_hangmen/mistake7/frame_last.png";
-  let timeShowLose = setTimeout(() => {showLose(timerEnd);}, 1200);
-}
+
 
 //returns an object to manage the actual game
 function newHangMen(user) {
@@ -253,10 +241,34 @@ function newHangMen(user) {
   };
 }
 
+
+// get a random word from the nth array of the bidimensional array 
+
 function randWord(arrNum) {
   let Arrlength = arrayWords[arrNum].length;
-  
   let randPos = Math.floor(Math.random() * Arrlength);
-  
   return arrayWords[arrNum][randPos].toUpperCase();
+}
+
+
+
+// reset functions 
+
+
+function resetWord() {
+  guessedWordLetters.innerHTML = "";
+}
+
+function resetImg() {
+  hangmanImg.src ="https://cdn.glitch.com/9c8d0bb5-abdb-4e8f-a289-be65a38e37c9%2FhangmenBlank.png?v=1596093417835";
+}
+
+function resetInput() {
+  inputName.value = "";
+}
+
+function reset() {
+  resetLetters();
+  resetImg();
+  resetInput();
 }
