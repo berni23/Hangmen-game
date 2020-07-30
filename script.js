@@ -158,6 +158,8 @@ function tEnd() {
   let timerEnd = ((currentTimer.getTime() - timerIni) / 1000).toFixed(0);
   return timerEnd;
 }
+
+
 function handleLetter(event) {
   event.target.classList.add("hide");
   let letter = event.target.innerHTML;
@@ -200,6 +202,8 @@ function newHangMen(user) {
     guessedWordLetters.appendChild(newSpace);
   });
   let displayedGuessedLetters = document.querySelectorAll(".word > li");
+  
+  
   function tryLetter(letter) {
     if (currentWord.indexOf(letter) !== -1) {
       currentWord.forEach((el, index) => {
@@ -218,8 +222,7 @@ function newHangMen(user) {
   }
 
   function displayFrames() {
-    hangmanImg.src =
-      "frames_hangmen/mistake" + mistakes + "/frame000" + currentFrame + ".png";
+    hangmanImg.src = "frames_hangmen/mistake" + mistakes + "/frame000" + currentFrame + ".png";
     currentFrame++;
     if (currentFrame >= 5) {
       clearInterval(intervalFrame);
@@ -253,6 +256,8 @@ function newHangMen(user) {
 
 function randWord(arrNum) {
   let Arrlength = arrayWords[arrNum].length;
+  
   let randPos = Math.floor(Math.random() * Arrlength);
+  
   return arrayWords[arrNum][randPos].toUpperCase();
 }
