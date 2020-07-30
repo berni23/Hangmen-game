@@ -165,6 +165,7 @@ function handleLetter(event) {
   } else if (currentHangMen.userLoses()) {
     timerEnd = tEnd();
     let time = setTimeout(showLast(timerEnd), 3000);
+    currentHangMen.addMatchesPlayed();
     scorePanel.firstChild.remove();
     scorePanel.firstChild.remove();
     resetWord();
@@ -184,7 +185,7 @@ function newHangMen(user) {
   let counterLetters = 0;
   let currentFrame = 0;
   let intervalFrame;
-  let frames = true;
+  //let frames = true;
   currentWord.forEach(el => {
     let newSpace = document.createElement("li");
     guessedWordLetters.appendChild(newSpace);
@@ -200,13 +201,16 @@ function newHangMen(user) {
       });
     } else {
       mistakes++;
+      console.log("mistakes",mistakes);
 
-      if (frames) {
+        //frames
+      
         intervalFrame = setInterval(displayFrames, 200);
-        frames = false;
+        //frames = false;
+        
+       // console.log("frames",frames);
       }
     }
-  }
 
   function displayFrames() {
     hangmanImg.src =
@@ -216,7 +220,7 @@ function newHangMen(user) {
     if (currentFrame >= 5) {
       clearInterval(intervalFrame);
       currentFrame = 0;
-      frames = true;
+      //frames = true;
     }
   }
 
@@ -234,7 +238,7 @@ function newHangMen(user) {
       user.currentScore = time;
     },
     addMatchesPlayed() {
-      user.matchesPLayed++;
+      user.matchesPlayed++;
     },
 
     addVictories() {
