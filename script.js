@@ -25,8 +25,8 @@ var btnNewUser = document.getElementById("btn-new-user");
 
 btnStart.addEventListener("click", start);
 
-btnPlayAgain.addEventListener("click",restart);
-btnNewUser.addEventListener("click",restart);
+btnPlayAgain.addEventListener("click", playAgain);
+btnNewUser.addEventListener("click", restart);
 
 let users = {};
 let currentUser;
@@ -41,12 +41,20 @@ function start(event) {
   timerIni = currentTimer.getTime();
 }
 
-
-function restart(event){
-  
+//new match with the same user
+function playAgain(event) {
+  currentHangMen = newHangMen(currentUser);
   screenEnd.classList.add("hide");
-  screen
+  screenGame.classList.remove("hide");
+}
 
+function restart(event) {
+  screenEnd.classList.add("hide");
+  screenUserName.classList.remove("hide");
+}
+
+function resetWord(){  
+  guessedWordLetters.innerHTML = "";
 }
 
 function addUser() {
