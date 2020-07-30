@@ -58,6 +58,7 @@ function showLose() {
   screenGame.classList.add("hide");
   screenEnd.classList.remove("hide");
   screenLose.classList.remove("hide");
+  //winTime.textContent = "You lost in " + timerEnd + " seconds!";
 }
 
 function User(username) {
@@ -105,9 +106,7 @@ function handleLetter(event) {
     showWin(timerEnd);
     currentHangMen.addMatchesPlayed();
   } else if (currentHangMen.userLoses()) {
-    let time = setTimeout(showLast, 3500);
-
-    //showLose();
+    let time = setTimeout(showLast, 3000);
   }
 }
 
@@ -183,6 +182,6 @@ function randWord(arrNum) {
 
 1 - Implement play again feature ( more difficult word each time);
 2 - Display result in the right;
-3 - HandMan;
+
 
 */
