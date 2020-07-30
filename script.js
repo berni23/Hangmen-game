@@ -1,11 +1,19 @@
 var alphabet = "abcdefghijklmnopqrstuvwxyz".split("");
 var gameLetters = document.querySelector(".game-letters");
 
-alphabet.forEach(letter => {
-  var newLetter = document.createElement("li");
-  newLetter.innerHTML = letter.toUpperCase();
-  gameLetters.appendChild(newLetter);
-});
+function resetLetters() {
+  gameLetters.innerHTML = "";
+  alphabet.forEach(letter => {
+    var newLetter = document.createElement("li");
+    newLetter.innerHTML = letter.toUpperCase();
+    gameLetters.appendChild(newLetter);
+  });
+
+  let letters = document.querySelectorAll(".game-letters > li");
+  letters.forEach(el => {
+    el.addEventListener("click", handleLetter);
+  });
+}
 
 // Start Game
 var inputName = document.getElementById("user-name");
@@ -24,7 +32,6 @@ var btnPlayAgain = document.getElementById("btn-play-again");
 var btnNewUser = document.getElementById("btn-new-user");
 
 btnStart.addEventListener("click", start);
-
 btnPlayAgain.addEventListener("click", playAgain);
 btnNewUser.addEventListener("click", restart);
 
@@ -36,6 +43,7 @@ let timerIni;
 function start(event) {
   addUser();
   hideStart();
+  resetLetters();
 
   let currentTimer = new Date();
   timerIni = currentTimer.getTime();
@@ -46,15 +54,33 @@ function playAgain(event) {
   currentHangMen = newHangMen(currentUser);
   screenEnd.classList.add("hide");
   screenGame.classList.remove("hide");
+  reset();
+
 }
 
 function restart(event) {
   screenEnd.classList.add("hide");
   screenUserName.classList.remove("hide");
+  reset();
 }
 
-function resetWord(){  
+function resetWord() {
   guessedWordLetters.innerHTML = "";
+}
+
+function resetImg() {
+  hangmanImg.src =
+    "https://cdn.glitch.com/9c8d0bb5-abdb-4e8f-a289-be65a38e37c9%2FhangmenBlank.png?v=1596093417835";
+}
+
+function resetInput() {
+  inputName.value = "";
+}
+
+function reset() {
+  resetLetters();
+  resetImg();
+  resetInput();
 }
 
 function addUser() {
@@ -109,11 +135,6 @@ function updateScore(score) {
 
 //Playing Game
 
-let letters = document.querySelectorAll(".game-letters > li");
-letters.forEach(el => {
-  el.addEventListener("click", handleLetter);
-});
-
 let arrayWords = [
   ["hola", "mesa", "boli", "sapo", "agua"],
   ["libro", "plato", "gorra"],
@@ -131,9 +152,11 @@ function handleLetter(event) {
     currentHangMen.updateTime(timerEnd);
     showWin(timerEnd);
     currentHangMen.addMatchesPlayed();
+    resetWord();
   } else if (currentHangMen.userLoses()) {
     let time = setTimeout(showLast, 3000);
     currentHangMen.updateTime("user has lost");
+    resetWord();
   }
 }
 
