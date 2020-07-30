@@ -20,8 +20,13 @@ var guessedWordLetters = document.querySelector(".word");
 var winTime = document.getElementById("win-time");
 var loseTime = document.getElementById("lose-time");
 var hangmanImg = document.getElementById("hangman-img");
+var btnPlayAgain = document.getElementById("btn-play-again");
+var btnNewUser = document.getElementById("btn-new-user");
 
 btnStart.addEventListener("click", start);
+
+btnPlayAgain.addEventListener("click",restart);
+btnNewUser.addEventListener("click",restart);
 
 let users = {};
 let currentUser;
@@ -34,6 +39,14 @@ function start(event) {
 
   let currentTimer = new Date();
   timerIni = currentTimer.getTime();
+}
+
+
+function restart(event){
+  
+  screenEnd.classList.add("hide");
+  screen
+
 }
 
 function addUser() {
@@ -80,6 +93,10 @@ function addScore(name, score) {
   newScoreCurrent.innerHTML = score;
   scorePanel.insertAdjacentElement("afterbegin", newScoreCurrent);
   scorePanel.insertAdjacentElement("afterbegin", newScoreName);
+}
+
+function updateScore(score) {
+  scorePanel.children[1].innerHTML = score + " seconds";
 }
 
 //Playing Game
@@ -167,7 +184,7 @@ function newHangMen(user) {
     },
     updateTime(time) {
       user.currentScore = time;
-      addScore(user[name], time);
+      updateScore(time);
     },
     addMatchesPlayed() {
       user.matchesPLayed++;
