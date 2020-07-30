@@ -107,6 +107,7 @@ function showWin(timerEnd) {
   screenEnd.classList.remove("hide");
   screenWin.classList.remove("hide");
   winTime.textContent = "You won in " + timerEnd + " seconds!";
+  resetWord();
 }
 
 function showLose(timerEnd) {
@@ -114,6 +115,7 @@ function showLose(timerEnd) {
   screenEnd.classList.remove("hide");
   screenLose.classList.remove("hide");
   loseTime.textContent = "You lost in " + timerEnd + " seconds!";
+  resetWord();
 }
 
 function User(username) {
@@ -165,14 +167,15 @@ function handleLetter(event) {
     currentHangMen.updateTime(timerEnd);
     showWin(timerEnd);
     currentHangMen.addMatchesPlayed();
-    resetWord();
+    currentHangMen.addVictories();
+
     updateScore(timerEnd + " seconds");
   } else if (currentHangMen.userLoses()) {
     timerEnd = tEnd();
-    let time = setTimeout(showLast(timerEnd), 3000);
+    let time = setTimeout(()=>{}
+                          showLast(timerEnd), 6000);
     currentHangMen.addMatchesPlayed();
-    currentHangMen.addVictories();
-    resetWord();
+  
   }
 }
 
@@ -189,7 +192,7 @@ function newHangMen(user) {
   let counterLetters = 0;
   let currentFrame = 0;
   let intervalFrame;
-  let frames = true;
+  //let frames = true;
   currentWord.forEach(el => {
     let newSpace = document.createElement("li");
     guessedWordLetters.appendChild(newSpace);
@@ -209,9 +212,8 @@ function newHangMen(user) {
 
         if(frames){
         intervalFrame = setInterval(displayFrames, 200);
-        frames = false;
+         frames = false;
         console.log("frames",frames);
-      }
     }
     }
 
