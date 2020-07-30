@@ -203,7 +203,6 @@ function newHangMen(user) {
   });
   let displayedGuessedLetters = document.querySelectorAll(".word > li");
   
-  
   function tryLetter(letter) {
     if (currentWord.indexOf(letter) !== -1) {
       currentWord.forEach((el, index) => {
