@@ -1,4 +1,4 @@
-var alphabet = "abcdefghijklmnopqrstuvwxyz".split("");
+var alphabet = "abcdefghijklmnopqrstuvwxyzñ".split("");
 var gameLetters = document.querySelector(".game-letters");
 
 function resetLetters() {
@@ -14,7 +14,6 @@ function resetLetters() {
     el.addEventListener("click", handleLetter);
   });
 }
-
 // Start Game
 var inputName = document.getElementById("user-name");
 var btnStart = document.getElementById("button-start");
@@ -66,7 +65,6 @@ function restart(event) {
     scorePanel.firstChild.remove();
     scorePanel.firstChild.remove();
   }
-
   reset();
 }
 
@@ -147,13 +145,13 @@ function updateScore(score) {
 let arrayWords = [
   ["hola", "mesa", "boli", "sapo", "agua"],
   ["libro", "plato", "gorra"],
-  ["guante", "piedra"]
+  ["guante", "piedra","digito"],
+  ["gigante,","guadaña,"]
 ];
 
 function tEnd() {
   let currentTimer = new Date();
   let timerEnd = ((currentTimer.getTime() - timerIni) / 1000).toFixed(0);
-
   return timerEnd;
 }
 function handleLetter(event) {
@@ -172,16 +170,14 @@ function handleLetter(event) {
     updateScore(timerEnd + " seconds");
   } else if (currentHangMen.userLoses()) {
     timerEnd = tEnd();
-    let time = setTimeout(()=>{}
-                          showLast(timerEnd), 6000);
+    let time = setTimeout(()=>{showLast(timerEnd);}, 3000);
     currentHangMen.addMatchesPlayed();
-  
   }
 }
 
 function showLast(timerEnd) {
   hangmanImg.src = "frames_hangmen/mistake7/frame_last.png";
-  let timeShowLose = setTimeout(showLose(timerEnd), 2000);
+  let timeShowLose = setTimeout(()=>{showLose(timerEnd);}, 1000);
 }
 
 //returns an object to manage the actual game
@@ -192,7 +188,7 @@ function newHangMen(user) {
   let counterLetters = 0;
   let currentFrame = 0;
   let intervalFrame;
-  //let frames = true;
+  let frames = true;
   currentWord.forEach(el => {
     let newSpace = document.createElement("li");
     guessedWordLetters.appendChild(newSpace);
@@ -208,12 +204,10 @@ function newHangMen(user) {
       });
     } else {
       mistakes++;
-      console.log("mistakes",mistakes);
-
         if(frames){
         intervalFrame = setInterval(displayFrames, 200);
          frames = false;
-        console.log("frames",frames);
+      }
     }
     }
 
@@ -257,11 +251,3 @@ function randWord(arrNum) {
   return arrayWords[arrNum][randPos].toUpperCase();
 }
 
-/* TO DO LIST
-
-0 - implement losing time
-1 - Implement play again feature ( more difficult word each time);
-2 - Display result in the right;
-
-
-*/

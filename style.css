@@ -63,6 +63,8 @@ button {
 dl {
   display:flex;
   flex-direction: column;
+  max-height: 400px;
+  overflow:auto;
 }
 
 dd{
