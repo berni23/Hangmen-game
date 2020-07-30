@@ -109,6 +109,7 @@ function newHangMen(user) {
   let mistakes = 0;
   let currentWord = randWord(user.matchesPlayed % arrayWords.length).split("");
   let counterLetters = 0;
+  let currentFrame = 0;
   currentWord.forEach(el => {
     let newSpace = document.createElement("li");
     guessedWordLetters.appendChild(newSpace);
@@ -124,9 +125,17 @@ function newHangMen(user) {
       });
     } else {
       mistakes++;
-      // siguiente frame del hangmen
+      let intervalFrame = setInterval(displayFrames,200);
+      currentFrame = 0;
     }
   }
+  
+  
+function displayFrames(){
+  
+  
+  
+}
 
   return {
     userWins() {
@@ -160,3 +169,4 @@ function randWord(arrNum) {
 3 - HandMan;
 
 */
+
