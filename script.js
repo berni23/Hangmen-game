@@ -143,13 +143,11 @@ let arrayWords = [
   ["guante", "piedra"]
 ];
 
-
-function tEnd(){
-  
+function tEnd() {
   let currentTimer = new Date();
   let timerEnd = ((currentTimer.getTime() - timerIni) / 1000).toFixed(0);
-  
-  return timerEnd
+
+  return timerEnd;
 }
 function handleLetter(event) {
   event.target.classList.add("hide");
@@ -160,24 +158,22 @@ function handleLetter(event) {
     let currentTimer = new Date();
     timerEnd = tEnd();
     currentHangMen.updateTime(timerEnd);
-    showWin(timerEnd + "seconds");
+    showWin(timerEnd);
     currentHangMen.addMatchesPlayed();
     resetWord();
+    updateScore(timerEnd + " seconds");
   } else if (currentHangMen.userLoses()) {
-    
     timerEnd = tEnd();
-    let time = setTimeout(showLast, 3000);
-    
-    updateScore("user has lost");
-    
-    showLose(timerEnd);
+    let time = setTimeout(showLast(timerEnd), 3000);
+    scorePanel.firstChild.remove();
+    scorePanel.firstChild.remove();
     resetWord();
   }
 }
 
-function showLast() {
+function showLast(timerEnd) {
   hangmanImg.src = "frames_hangmen/mistake7/frame_last.png";
-  let timeShowLose = setTimeout(showLose, 2000);
+  let timeShowLose = setTimeout(showLose(timerEnd), 2000);
 }
 
 //returns an object to manage the actual game
@@ -188,6 +184,7 @@ function newHangMen(user) {
   let counterLetters = 0;
   let currentFrame = 0;
   let intervalFrame;
+  let frames = true;
   currentWord.forEach(el => {
     let newSpace = document.createElement("li");
     guessedWordLetters.appendChild(newSpace);
@@ -203,7 +200,11 @@ function newHangMen(user) {
       });
     } else {
       mistakes++;
-      intervalFrame = setInterval(displayFrames, 200);
+
+      if (frames) {
+        intervalFrame = setInterval(displayFrames, 200);
+        frames = false;
+      }
     }
   }
 
@@ -215,6 +216,7 @@ function newHangMen(user) {
     if (currentFrame >= 5) {
       clearInterval(intervalFrame);
       currentFrame = 0;
+      frames = true;
     }
   }
 
@@ -230,10 +232,13 @@ function newHangMen(user) {
     },
     updateTime(time) {
       user.currentScore = time;
-     
     },
     addMatchesPlayed() {
       user.matchesPLayed++;
+    },
+
+    addVictories() {
+      user.victories;
     }
   };
 }
