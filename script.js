@@ -267,8 +267,7 @@ function resetWord() {
 }
 
 function resetImg() {
-  hangmanImg.src =
-    "https://cdn.glitch.com/9c8d0bb5-abdb-4e8f-a289-be65a38e37c9%2FhangmenBlank.png?v=1596093417835";
+  hangmanImg.src = "frames_hangmen/hangmenBlank.png";
 }
 
 function resetInput() {
