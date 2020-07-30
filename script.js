@@ -53,6 +53,7 @@ function playAgain(event) {
   currentHangMen = newHangMen(currentUser);
   screenEnd.classList.add("hide");
   screenGame.classList.remove("hide");
+  updateScore("Currently playing...");
   reset();
 }
 
@@ -61,7 +62,7 @@ function restart(event) {
   screenWin.classList.add("hide");
   screenLose.classList.add("hide");
   screenUserName.classList.remove("hide");
-  if(currentUser.currentScore === undefined){
+  if (currentUser.currentScore === undefined) {
     scorePanel.firstChild.remove();
     scorePanel.firstChild.remove();
   }
@@ -90,9 +91,9 @@ function reset() {
 function addUser() {
   let name = inputName.value;
   users[name] = User(name);
-  addScore(name, "Currently Playing");
+  addScore(name, "Currently playing...");
   currentHangMen = newHangMen(users[name]);
-  currentUser=users[name];
+  currentUser = users[name];
 }
 
 function hideStart() {
@@ -145,8 +146,8 @@ function updateScore(score) {
 let arrayWords = [
   ["hola", "mesa", "boli", "sapo", "agua"],
   ["libro", "plato", "gorra"],
-  ["guante", "piedra","digito"],
-  ["gigante,","guadaña,"]
+  ["guante", "piedra", "digito"],
+  ["gigante,", "guadaña,"]
 ];
 
 function tEnd() {
@@ -170,14 +171,18 @@ function handleLetter(event) {
     updateScore(timerEnd + " seconds");
   } else if (currentHangMen.userLoses()) {
     timerEnd = tEnd();
-    let time = setTimeout(()=>{showLast(timerEnd);}, 3000);
+    let time = setTimeout(() => {
+      showLast(timerEnd);
+    }, 3000);
     currentHangMen.addMatchesPlayed();
   }
 }
 
 function showLast(timerEnd) {
   hangmanImg.src = "frames_hangmen/mistake7/frame_last.png";
-  let timeShowLose = setTimeout(()=>{showLose(timerEnd);}, 1000);
+  let timeShowLose = setTimeout(() => {
+    showLose(timerEnd);
+  }, 1200);
 }
 
 //returns an object to manage the actual game
@@ -204,12 +209,12 @@ function newHangMen(user) {
       });
     } else {
       mistakes++;
-        if(frames){
+      if (frames) {
         intervalFrame = setInterval(displayFrames, 200);
-         frames = false;
+        frames = false;
       }
     }
-    }
+  }
 
   function displayFrames() {
     hangmanImg.src =
@@ -250,4 +255,3 @@ function randWord(arrNum) {
   let randPos = Math.floor(Math.random() * Arrlength);
   return arrayWords[arrNum][randPos].toUpperCase();
 }
-
