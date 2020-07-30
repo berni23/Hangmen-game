@@ -55,11 +55,13 @@ function playAgain(event) {
   screenEnd.classList.add("hide");
   screenGame.classList.remove("hide");
   reset();
-
 }
 
 function restart(event) {
   screenEnd.classList.add("hide");
+
+  screenWin.classList.add("hide");
+  screenLose.classList.add("hide");
   screenUserName.classList.remove("hide");
   reset();
 }
@@ -130,7 +132,7 @@ function addScore(name, score) {
 }
 
 function updateScore(score) {
-  scorePanel.children[1].innerHTML = score + " seconds";
+  scorePanel.children[1].innerHTML = score;
 }
 
 //Playing Game
@@ -141,6 +143,14 @@ let arrayWords = [
   ["guante", "piedra"]
 ];
 
+
+function tEnd(){
+  
+  let currentTimer = new Date();
+  let timerEnd = ((currentTimer.getTime() - timerIni) / 1000).toFixed(0);
+  
+  return timerEnd
+}
 function handleLetter(event) {
   event.target.classList.add("hide");
   let letter = event.target.innerHTML;
@@ -148,14 +158,19 @@ function handleLetter(event) {
   currentHangMen.addLetter(letter);
   if (currentHangMen.userWins()) {
     let currentTimer = new Date();
-    timerEnd = ((currentTimer.getTime() - timerIni) / 1000).toFixed(0);
+    timerEnd = tEnd();
     currentHangMen.updateTime(timerEnd);
-    showWin(timerEnd);
+    showWin(timerEnd + "seconds");
     currentHangMen.addMatchesPlayed();
     resetWord();
   } else if (currentHangMen.userLoses()) {
+    
+    timerEnd = tEnd();
     let time = setTimeout(showLast, 3000);
-    currentHangMen.updateTime("user has lost");
+    
+    updateScore("user has lost");
+    
+    showLose(timerEnd);
     resetWord();
   }
 }
@@ -215,7 +230,7 @@ function newHangMen(user) {
     },
     updateTime(time) {
       user.currentScore = time;
-      updateScore(time);
+     
     },
     addMatchesPlayed() {
       user.matchesPLayed++;
