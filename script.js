@@ -39,6 +39,8 @@ let currentUser;
 let currentHangMen;
 let timerIni;
 
+let canLose = true;
+
 function start(event) {
   addUser();
   hideStart();
@@ -115,6 +117,7 @@ function showLose(timerEnd) {
   screenLose.classList.remove("hide");
   loseTime.textContent = "You lost in " + timerEnd + " seconds!";
   resetWord();
+  canLose = true;
 }
 
 function User(username) {
@@ -169,20 +172,18 @@ function handleLetter(event) {
     currentHangMen.addVictories();
 
     updateScore(timerEnd + " seconds");
-  } else if (currentHangMen.userLoses()) {
+  } else if (currentHangMen.userLoses() && canLose) {
+    canLose = false;
     timerEnd = tEnd();
-    let time = setTimeout(() => {
-      showLast(timerEnd);
-    }, 3000);
+    let time = setTimeout(() => {showLast(timerEnd);}, 4000);
     currentHangMen.addMatchesPlayed();
+    
   }
 }
 
 function showLast(timerEnd) {
   hangmanImg.src = "frames_hangmen/mistake7/frame_last.png";
-  let timeShowLose = setTimeout(() => {
-    showLose(timerEnd);
-  }, 1200);
+  let timeShowLose = setTimeout(() => {showLose(timerEnd);}, 1200);
 }
 
 //returns an object to manage the actual game
