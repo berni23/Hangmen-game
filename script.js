@@ -105,14 +105,16 @@ function handleLetter(event) {
     showWin(timerEnd);
     currentHangMen.addMatchesPlayed();
   } else if (currentHangMen.userLoses()) {
-    
-    let time = setTimeout(() =>hangmanImg.src = "frames_hangmen/mistake7/frame_last",3500);
-    let timeShowLose = setTimeout(showLose,1000);
+    let time = setTimeout(showLast, 3500);
+
     //showLose();
   }
 }
 
-
+function showLast() {
+  hangmanImg.src = "frames_hangmen/mistake7/frame_last.png";
+  let timeShowLose = setTimeout(showLose, 2000);
+}
 
 //returns an object to manage the actual game
 function newHangMen(user) {
@@ -142,9 +144,9 @@ function newHangMen(user) {
   }
 
   function displayFrames() {
-    hangmanImg.src = "frames_hangmen/mistake" + mistakes + "/frame000" + currentFrame + ".png";
+    hangmanImg.src =
+      "frames_hangmen/mistake" + mistakes + "/frame000" + currentFrame + ".png";
     console.log(hangmanImg.src);
-
     currentFrame++;
     if (currentFrame >= 5) {
       clearInterval(intervalFrame);
