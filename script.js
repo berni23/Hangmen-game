@@ -38,14 +38,14 @@ btnPlayAgain.addEventListener("click", playAgain);
 btnNewUser.addEventListener("click", restart);
 
 let users = {};
-let currentUser;
 let currentHangMen;
 let timerIni;
 let canLose = true;
 
 function start(event) {
   if (inputName.value != "") {
-    addUser();
+    //console.log(inputName.value);
+    addUser(inputName.value);
     hideStart();
     resetLetters();
 
@@ -56,10 +56,9 @@ function start(event) {
 
 //new match with the same user
 function playAgain(event) {
-  currentHangMen = newHangMen(currentUser);
+  currentHangMen.reset()
   screenEnd.classList.add("hide");
   screenGame.classList.remove("hide");
-  updateScore("Currently playing...");
   reset();
 }
 
@@ -69,21 +68,11 @@ function restart(event) {
   screenWin.classList.add("hide");
   screenLose.classList.add("hide");
   screenUserName.classList.remove("hide");
-  if (currentUser.currentScore === undefined) {
-    // remove user to the score table if he/she lost ( only users who won)
-    scorePanel.firstChild.remove();
-    scorePanel.firstChild.remove();
-  }
+
   reset();
 }
 
-function addUser() {
-  let name = inputName.value;
-  users[name] = User(name);
-  addScore(name, "Currently playing...");
-  currentHangMen = newHangMen(users[name]);
-  currentUser = users[name];
-}
+
 
 function hideStart() {
   screenUserName.classList.add("hide");
@@ -94,6 +83,7 @@ function showWin(timerEnd) {
   screenGame.classList.add("hide");
   screenEnd.classList.remove("hide");
   screenWin.classList.remove("hide");
+  screenLose.classList.add("hide");
   winTime.textContent = "You won in " + timerEnd + " seconds!";
   resetWord();
 }
@@ -103,6 +93,7 @@ function showLose(timerEnd) {
   screenEnd.classList.remove("hide");
   screenLose.classList.remove("hide");
   loseTime.textContent = "You lost in " + timerEnd + " seconds!";
+  screenWin.classList.add("hide");
   resetWord();
   canLose = true;
 }
@@ -116,29 +107,25 @@ function showLast(timerEnd) {
   }, 1200);
 }
 
-function User(username) {
-  return {
-    name: username,
+function addUser(name) {
+
+  var user = {
+    name: name,
     playing: true,
     currentScore: undefined,
     elapsedTime: undefined,
     victories: 0,
     matchesPlayed: 0
-  };
+  }
+  users[name] = user;
+  currentHangMen = newHangMen(user);
+  currentUser = user;
+
 }
 
-function addScore(name, score) {
-  let newScoreName = document.createElement("dt");
-  let newScoreCurrent = document.createElement("dd");
-  newScoreName.innerHTML = name;
-  newScoreCurrent.innerHTML = score;
-  scorePanel.insertAdjacentElement("afterbegin", newScoreCurrent);
-  scorePanel.insertAdjacentElement("afterbegin", newScoreName);
-}
 
-function updateScore(score) {
-  scorePanel.children[1].innerHTML = score;
-}
+
+
 
 //Playing Game
 
@@ -152,12 +139,12 @@ function handleLetter(event) {
   if (currentHangMen.userWins()) {
     let currentTimer = new Date();
     timerEnd = tEnd();
-    currentHangMen.updateTime(timerEnd);
+    currentHangMen.updateTime(timerEnd + " seconds");
     showWin(timerEnd);
     currentHangMen.addMatchesPlayed();
     currentHangMen.addVictories();
+    currentHangMen.updateUser();
 
-    updateScore(timerEnd + " seconds");
   } else if (currentHangMen.userLoses() && canLose) {
     canLose = false;
     timerEnd = tEnd();
@@ -165,6 +152,13 @@ function handleLetter(event) {
       showLast(timerEnd);
     }, 4000);
     currentHangMen.addMatchesPlayed();
+    currentHangMen.updateTime("lost");
+    currentHangMen.updateUser();
+
+    //currentHangMen.updateTime("match lost");
+
+
+
   }
 }
 
@@ -178,6 +172,10 @@ function newHangMen(user) {
   let currentFrame = 0;
   let intervalFrame;
   let frames = true;
+
+  addScore("Currently playing...");
+
+
   currentWord.forEach(el => {
     let newSpace = document.createElement("li");
     guessedWordLetters.appendChild(newSpace);
@@ -212,6 +210,28 @@ function newHangMen(user) {
     }
   }
 
+  function updateScore(score) {
+
+    if (score === "lost") {
+
+      scorePanel.firstChild.remove();
+      scorePanel.firstChild.remove();
+    } else {
+      scorePanel.children[1].innerHTML = score;
+    }
+
+  }
+
+  function addScore(score) {
+
+    let newScoreName = document.createElement("dt");
+    let newScoreCurrent = document.createElement("dd");
+    newScoreName.innerHTML = user.name;
+    newScoreCurrent.innerHTML = score;
+    scorePanel.insertAdjacentElement("afterbegin", newScoreCurrent);
+    scorePanel.insertAdjacentElement("afterbegin", newScoreName);
+  }
+
   return {
     userWins() {
       return mistakes <= MAX_MISTAKES && counterLetters >= currentWord.length;
@@ -223,6 +243,7 @@ function newHangMen(user) {
       tryLetter(letter);
     },
     updateTime(time) {
+
       user.currentScore = time;
     },
     addMatchesPlayed() {
@@ -231,9 +252,27 @@ function newHangMen(user) {
 
     addVictories() {
       user.victories;
+    },
+
+    updateUser() {
+      users.name = user;
+
+      updateScore(user.currentScore);
+    },
+
+    reset() {
+      mistakes = 0;
+      currentWord = randWord(user.matchesPlayed % arrayWords.length).split("");
+      counterLetters = 0;
+      currentFrame = 0;
+      intervalFrame;
+      frames = true;
+      addScore("Currently playing...");
     }
   };
+
 }
+
 
 // UTILS functions
 
