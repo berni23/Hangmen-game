@@ -48,7 +48,6 @@ function start(event) {
     addUser(inputName.value);
     hideStart();
     resetLetters();
-
     let currentTimer = new Date();
     timerIni = currentTimer.getTime();
   }
@@ -56,7 +55,7 @@ function start(event) {
 
 //new match with the same user
 function playAgain(event) {
-  currentHangMen.reset()
+  currentHangMen.reset();
   screenEnd.classList.add("hide");
   screenGame.classList.remove("hide");
   reset();
@@ -68,11 +67,8 @@ function restart(event) {
   screenWin.classList.add("hide");
   screenLose.classList.add("hide");
   screenUserName.classList.remove("hide");
-
   reset();
 }
-
-
 
 function hideStart() {
   screenUserName.classList.add("hide");
@@ -108,7 +104,6 @@ function showLast(timerEnd) {
 }
 
 function addUser(name) {
-
   var user = {
     name: name,
     playing: true,
@@ -122,11 +117,6 @@ function addUser(name) {
   currentUser = user;
 
 }
-
-
-
-
-
 //Playing Game
 
 // function  connected to each letter ( line 14 ) to update the currenthangMen at each event and hide the letter
@@ -157,8 +147,6 @@ function handleLetter(event) {
 
     //currentHangMen.updateTime("match lost");
 
-
-
   }
 }
 
@@ -166,21 +154,23 @@ function handleLetter(event) {
 
 function newHangMen(user) {
   const MAX_MISTAKES = 6;
-  let mistakes = 0;
-  let currentWord = randWord(user.matchesPlayed % arrayWords.length).split("");
-  let counterLetters = 0;
-  let currentFrame = 0;
-  let intervalFrame;
-  let frames = true;
+  var mistakes = 0;
+  var currentWord = randWord(user.matchesPlayed % arrayWords.length).split("");
+
+
+  var counterLetters = 0;
+  var currentFrame = 0;
+  var intervalFrame;
+  var frames = true;
 
   addScore("Currently playing...");
-
-
   currentWord.forEach(el => {
-    let newSpace = document.createElement("li");
+
+    console.log(guessedWordLetters);
+    var newSpace = document.createElement("li");
     guessedWordLetters.appendChild(newSpace);
   });
-  let displayedGuessedLetters = document.querySelectorAll(".word > li");
+  var displayedGuessedLetters = document.querySelectorAll(".word > li");
 
   function tryLetter(letter) {
     if (currentWord.indexOf(letter) !== -1) {
@@ -211,19 +201,15 @@ function newHangMen(user) {
   }
 
   function updateScore(score) {
-
     if (score === "lost") {
-
       scorePanel.firstChild.remove();
       scorePanel.firstChild.remove();
     } else {
       scorePanel.children[1].innerHTML = score;
     }
-
   }
 
   function addScore(score) {
-
     let newScoreName = document.createElement("dt");
     let newScoreCurrent = document.createElement("dd");
     newScoreName.innerHTML = user.name;
@@ -231,7 +217,6 @@ function newHangMen(user) {
     scorePanel.insertAdjacentElement("afterbegin", newScoreCurrent);
     scorePanel.insertAdjacentElement("afterbegin", newScoreName);
   }
-
   return {
     userWins() {
       return mistakes <= MAX_MISTAKES && counterLetters >= currentWord.length;
@@ -249,14 +234,11 @@ function newHangMen(user) {
     addMatchesPlayed() {
       user.matchesPlayed++;
     },
-
     addVictories() {
       user.victories;
     },
-
     updateUser() {
       users.name = user;
-
       updateScore(user.currentScore);
     },
 
@@ -268,6 +250,13 @@ function newHangMen(user) {
       intervalFrame;
       frames = true;
       addScore("Currently playing...");
+      currentWord.forEach(el => {
+        var newSpace = document.createElement("li");
+        guessedWordLetters.appendChild(newSpace);
+      });
+
+      displayedGuessedLetters = document.querySelectorAll(".word > li");
+
     }
   };
 
@@ -282,7 +271,7 @@ let arrayWords = [
   ["hola", "mesa", "boli", "sapo", "agua"],
   ["libro", "plato", "gorra"],
   ["guante", "piedra", "digito"],
-  ["gigante,", "guadaña,"]
+  ["gigante", "guadaña"]
 ];
 
 // get a random word from the nth array of the bidimensional array

@@ -1,96 +1,90 @@
 <!DOCTYPE html>
 <html lang="en">
-  <head>
-    <meta charset="utf-8" />
-    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
-    <meta name="viewport" content="width=device-width, initial-scale=1" />
 
-    <title>Hello!</title>
+<head>
+  <meta charset="utf-8" />
+  <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
 
-    <!-- import the webpage's stylesheet -->
-    <link rel="stylesheet" href="/style.css" />
+  <title>Hello!</title>
 
-    <!-- import the webpage's javascript file -->
+  <!-- import the webpage's stylesheet -->
+  <link rel="stylesheet" href="/style.css" />
 
-    <script src="https://code.iconify.design/1/1.0.7/iconify.min.js"></script>
-    <script src="/script.js" defer></script>
-  </head>
-  <body>
-    <div class="container">
-      <section class="container-left">
-        <div id="screen-username" class="">
-          <h2>Choose a user name</h2>
-          <label for="user-name">User name</label>
-          <input type="text" id="user-name"/>
-          <button id="button-start">Start</button>
-        </div>
-        <div id="screen-game" class="ini hide">
-          <div class="game-wrapper">
-            <div class="hangman">
-              <img id = "hangman-img" src="frames_hangmen/hangmenBlank.png" alt="a hangman">
-            </div>
-            <div class="guess-word">
-              <h3>
-                Guess the word
-              </h3>
-              <ul class="word">
-              </ul>
-            </div>
+  <!-- import the webpage's javascript file -->
+
+  <script src="https://code.iconify.design/1/1.0.7/iconify.min.js"></script>
+  <script src="/script.js" defer></script>
+</head>
+
+<body>
+  <div class="container">
+    <section class="container-left">
+      <div id="screen-username" class="">
+        <h2>Choose a user name</h2>
+        <label for="user-name">User name</label>
+        <input type="text" id="user-name" />
+        <button id="button-start">Start</button>
+      </div>
+      <div id="screen-game" class="ini hide">
+        <div class="game-wrapper">
+          <div class="hangman">
+            <img id="hangman-img" src="frames_hangmen/hangmenBlank.png" alt="a hangman">
           </div>
+          <div class="guess-word">
+            <h3>
+              Guess the word
+            </h3>
+            <ul class="word">
+            </ul>
+          </div>
+        </div>
+        <ul class="game-letters">
+        </ul>
+      </div>
+      <div id="screen-end" class="ini hide">
+        <div id="win-wrapper" class="hide">
+          <h1>
+            You won!
+            <span class="iconify" data-icon="emojione:party-popper" data-inline="false"></span>
+          </h1>
+          <br />
+          <p id="win-time">
+            You won in X seconds
+            <!-- seconds in javascript-->
+          </p>
+          <br />
+        </div>
+        <div id="lose-wrapper" class="hide">
+          <h1>
+            You lost!
+            <span class="iconify" data-icon="twemoji:sad-but-relieved-face" data-inline="false"></span>
+          </h1>
+          <br />
+          <p id="lose-time">
+            You lost in X seconds
 
-          <ul class="game-letters">
-          </ul>
+            <!-- seconds in javascript-->
+          </p>
+          <br />
         </div>
-        <div id="screen-end" class="ini hide">
-          <div id="win-wrapper" class = "hide">
-            <h1>
-              You won!
-              <span
-                class="iconify"
-                data-icon="emojione:party-popper"
-                data-inline="false"
-              ></span>
-            </h1>
-            <br />
-            <p id="win-time">
-              You won in X seconds 
-              <!-- seconds in javascript-->
-            </p>
-            <br/>
-          </div>
-          <div id="lose-wrapper" class =  "hide">
-            <h1>
-              You lost!
-              <span
-                class="iconify"
-                data-icon="twemoji:sad-but-relieved-face"
-                data-inline="false"
-              ></span>
-            </h1>
-            <br />
-            <p id="lose-time">
-              You lost in X seconds
-             
-              <!-- seconds in javascript-->
-            </p>
-             <br />
-          </div>
-          <button id="btn-play-again">
-            Play again!
-          </button>
-          <button id="btn-new-user">
-            New user
-          </button>
-        </div>
-      </section>
-      <section id="user-scores" class="container-right">
-        <h3>
-          User Scores
-        </h3>
-        <dl id="user-score-list">
-          <!-- To be filled using javascript-->
-        </dl>
-      </section>
-    </div>
-  </body>
+        <button id="btn-play-again">
+          Play again!
+        </button>
+        <button id="btn-new-user">
+          New user
+        </button>
+      </div>
+    </section>
+    <section id="user-scores" class="container-right">
+      <h3>
+        User Scores
+      </h3>
+      <dl id="user-score-list">
+        <!-- To be filled using javascript-->
+      </dl>
+    </section>
+  </div>
+</body>
+
 </html>
